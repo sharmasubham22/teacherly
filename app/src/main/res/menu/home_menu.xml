@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/edit_profile"
+            android:icon="@drawable/ic_edit"
+            android:title="@string/edit_profile"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/my_assignments"
+            android:icon="@drawable/ic_assignments"
+            android:title="@string/my_assignments"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/my_address"
+            android:icon="@drawable/ic_address"
+            android:title="@string/my_address"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/session_bookings"
+            android:icon="@drawable/ic_calendar"
+            android:title="@string/session_bookings"
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/chat_with_us"
+            android:icon="@drawable/ic_chat"
+            android:title="@string/chat_with_us"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/logout"
+            app:showAsAction="ifRoom" />
+</menu>
