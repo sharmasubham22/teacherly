@@ -3,4 +3,12 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_tutor">Tutor Title</string>
+    <string name="cost_of_tutor">35$/hr</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="my_assignments">My Assignments</string>
+    <string name="my_address">My Address</string>
+    <string name="session_bookings">Session Bookings</string>
+    <string name="chat_with_us">Chat with us</string>
+    <string name="logout">Logout</string>
 </resources>
