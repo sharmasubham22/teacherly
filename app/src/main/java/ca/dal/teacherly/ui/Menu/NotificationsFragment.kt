@@ -11,6 +11,7 @@ import ca.dal.teacherly.databinding.FragmentMenuBinding
 
 class NotificationsFragment : Fragment() {
 
+
     private var _binding: FragmentMenuBinding? = null
 
     // This property is only valid between onCreateView and
@@ -25,6 +26,7 @@ class NotificationsFragment : Fragment() {
 
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
         return root
     }
 
