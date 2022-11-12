@@ -7,15 +7,15 @@ class TutorController {
         return arrayOf<Tutor>()
     }
 
-    fun getTutorById(id: String): Tutor {
-        return Tutor()
-    }
-
-    fun getTutorByName(name: String): Tutor {
-        return Tutor()
-    }
-
-    fun updateTutor(id: String, Tutor: Tutor): Boolean{
-        return true
-    }
+//    fun getTutorById(id: String): Tutor {
+//        return Tutor()
+//    }
+//
+//    fun getTutorByName(name: String): Tutor {
+//        return Tutor()
+//    }
+//
+//    fun updateTutor(id: String, Tutor: Tutor): Boolean{
+//        return true
+//    }
 }

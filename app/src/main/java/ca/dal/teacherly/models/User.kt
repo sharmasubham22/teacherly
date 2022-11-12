@@ -1,4 +1,3 @@
 package ca.dal.teacherly.models
 
-class User {
-}
+data class User (val id: String)
