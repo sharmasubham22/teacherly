@@ -1,4 +1,3 @@
 package ca.dal.teacherly.models
 
-class Tutor {
-}
+data class Tutor(val tutorName: String, val createdAt: String, val updatedAt: String, val phone: String, val email: String, val userId: User, val costPerHour: String, val tutorImageURL: String)
