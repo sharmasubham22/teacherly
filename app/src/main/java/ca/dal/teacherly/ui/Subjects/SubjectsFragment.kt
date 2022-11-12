@@ -6,6 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import ca.dal.teacherly.adapters.SubjectsAdapter
+import ca.dal.teacherly.adapters.TutorsAdapter
+import ca.dal.teacherly.data.InitialSubjects
+import ca.dal.teacherly.data.InitialTutors
 import ca.dal.teacherly.databinding.FragmentSubjectsBinding
 
 class SubjectsFragment : Fragment() {
@@ -24,6 +30,9 @@ class SubjectsFragment : Fragment() {
 
         _binding = FragmentSubjectsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        _binding!!.subjectsList.adapter = SubjectsAdapter(InitialSubjects.getAll())
+        _binding!!.subjectsList.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL, false)
 
         return root
     }

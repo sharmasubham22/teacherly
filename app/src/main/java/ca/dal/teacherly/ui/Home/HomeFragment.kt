@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.dal.teacherly.adapters.TutorsAdapter
 import ca.dal.teacherly.data.InitialTutors
@@ -31,7 +32,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         _binding!!.homeTutorsList.adapter = TutorsAdapter(InitialTutors.getAll())
-        _binding!!.homeTutorsList.layoutManager = LinearLayoutManager(this.context)
+        _binding!!.homeTutorsList.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL, false)
 
         return root
     }

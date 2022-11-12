@@ -21,11 +21,11 @@
             android:layout_height="64dp"
             android:src="@mipmap/ic_launcher"
             android:layout_gravity="center"
-            android:id="@+id/tutorImage"
+            android:id="@+id/subjectImage"
             />
 
         <TextView
-            android:id="@+id/tutorTitle"
+            android:id="@+id/subjectTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
@@ -37,28 +37,23 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tutorCost"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"
-            android:textSize="10sp"
-            android:layout_marginTop="4dp"
-            android:maxLines="2"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:hint="@string/cost_of_tutor"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            >
 
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="4"
                 android:textSize="10sp"
-                android:layout_marginTop="8dp"
-                android:text="Book Tutor"
+                android:text="Search Tutors"
                 />
+
+        </LinearLayout>
 
 
     </LinearLayout>
