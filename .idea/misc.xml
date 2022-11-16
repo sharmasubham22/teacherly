@@ -3,6 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/drawable-anydpi/ic_edit.xml" value="0.121" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/drawable-anydpi/ic_menu.xml" value="0.121" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.121" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/drawable/customised_login_button.xml" value="0.1305" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.121" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/drawable/ic_launcher_background.xml" value="0.121" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/layout/activity_main.xml" value="0.20425724637681159" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/layout/create_assignment.xml" value="0.20425724637681159" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/layout/fragment_home.xml" value="0.20425724637681159" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/layout/fragment_menu.xml" value="0.20425724637681159" />
+        <entry key="..\:/Dhairya/AndroidStudioProjects/macs-11/app/src/main/res/layout/login.xml" value="0.264" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14336372847011145" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
