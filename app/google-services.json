@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "114127155405",
+    "project_id": "teacherly-7e70d",
+    "storage_bucket": "teacherly-7e70d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114127155405:android:afa0cd957a7b7a33603984",
+        "android_client_info": {
+          "package_name": "ca.dal.teacherly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114127155405-26t537hs460tls81ff0q400v9ubnsv0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6c14OPgG7rHgT9TZIOZYxbw1ifJ_MImk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114127155405-26t537hs460tls81ff0q400v9ubnsv0q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
