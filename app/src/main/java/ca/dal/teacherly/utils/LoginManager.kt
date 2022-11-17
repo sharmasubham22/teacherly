@@ -1,8 +1,10 @@
 package ca.dal.teacherly.utils
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.login.*
@@ -23,7 +25,9 @@ class LoginManager : AppCompatActivity() {
                     .addOnCompleteListener(this){
                         task->
                         if(task.isSuccessful){
-                            Toast.makeText(this, "Login Successfull", Toast.LENGTH_LONG).show()
+//                            var intent = Intent(applicationContext, MainActivity::class.java)
+//                            startActivity(intent)
+                          Toast.makeText(this, "Login Successfull", Toast.LENGTH_LONG).show()
                         }else{
                             Toast.makeText(this, "Wrong Details", Toast.LENGTH_LONG).show()
                         }
