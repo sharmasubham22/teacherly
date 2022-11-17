@@ -30,15 +30,15 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/customised_login_textfield"
         android:drawableLeft="@drawable/ic_edit"
-        android:textSize="22dp"
         android:drawablePadding="7dp"
         android:elevation="2dp"
         android:ems="10"
         android:hint="Full Name"
         android:inputType="text"
+        android:textSize="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TeacherRadioButton" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <EditText
         android:id="@+id/RegisterEmail"
@@ -206,26 +206,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RegisterPostalCode" />
 
-    <RadioButton
-        android:id="@+id/StudentRadioButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Student"
-        app:layout_constraintBottom_toTopOf="@+id/RegisterName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="32dp">
 
-    <RadioButton
-        android:id="@+id/TeacherRadioButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="80dp"
-        android:text="Teacher"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <RadioButton
+            android:id="@+id/teacherRadioButton"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Teacher" />
+
+        <RadioButton
+            android:id="@+id/studentRadioButton"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Student" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

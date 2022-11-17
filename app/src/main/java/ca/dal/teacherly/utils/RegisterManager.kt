@@ -2,8 +2,12 @@ package ca.dal.teacherly.utils
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
 import com.google.firebase.auth.FirebaseAuth
@@ -17,32 +21,43 @@ class RegisterManager: AppCompatActivity() {
         setContentView(R.layout.registration)
         auth = FirebaseAuth.getInstance()
 
-        Registration.setOnClickListener(){
-            if(checkForInput()){
-                var name = RegisterPassword.text.toString()
-                val email = RegisterEmail.text.toString()
-                val password = RegisterPassword.text.toString()
-                var confirmPassword = RegisterConfirmPassword.text.toString()
-                var mobileNumber = RegisterMobile.text.toString()
-                var streetName = RegisterStreetName.text.toString()
-                var city = RegisterCity.text.toString()
-                var province = RegisterProvince.text.toString()
-                var postalCode = RegisterPostalCode.text.toString()
+        val rdGroup = findViewById<RadioGroup>(R.id.radioGroup)
 
-                if(password == confirmPassword){
-                    auth.createUserWithEmailAndPassword(email,password)
-                        .addOnCompleteListener(this){
-                                task->
-                            if(task.isSuccessful){
-                            var intent = Intent(this, LoginManager::class.java)
-                            startActivity(intent)
-//                                Toast.makeText(this, "Registration Successful", Toast.LENGTH_LONG).show()
-                            }else{
-                                Toast.makeText(this, "Wrong Details", Toast.LENGTH_LONG).show()
+        Registration.setOnClickListener(){
+            val selectedBtn:Int = rdGroup!!.checkedRadioButtonId
+            val btn = findViewById<RadioButton>(selectedBtn)
+
+            if(checkForInput()){
+                if(rdGroup.isNotEmpty()){
+
+                    var type = btn.text.toString()
+                    var name = RegisterPassword.text.toString()
+                    val email = RegisterEmail.text.toString()
+                    val password = RegisterPassword.text.toString()
+                    var confirmPassword = RegisterConfirmPassword.text.toString()
+                    var mobileNumber = RegisterMobile.text.toString()
+                    var streetName = RegisterStreetName.text.toString()
+                    var city = RegisterCity.text.toString()
+                    var province = RegisterProvince.text.toString()
+                    var postalCode = RegisterPostalCode.text.toString()
+
+                    if(password == confirmPassword){
+                        auth.createUserWithEmailAndPassword(email,password)
+                            .addOnCompleteListener(this){
+                                    task->
+                                if(task.isSuccessful){
+//                                    var intent = Intent(this, LoginManager::class.java)
+//                                    startActivity(intent)
+                                Toast.makeText(this, "Registration Successful for " + btn.text.toString(), Toast.LENGTH_LONG).show()
+                                }else{
+                                    Toast.makeText(this, "Wrong Details", Toast.LENGTH_LONG).show()
+                                }
                             }
-                        }
+                    }else{
+                        Toast.makeText(this, "Password doesn't match", Toast.LENGTH_LONG).show()
+                    }
                 }else{
-                    Toast.makeText(this, "Password doesn't match", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Select Registration Type", Toast.LENGTH_LONG).show()
                 }
             }else{
                 Toast.makeText(this, "Enter the details", Toast.LENGTH_LONG).show()
