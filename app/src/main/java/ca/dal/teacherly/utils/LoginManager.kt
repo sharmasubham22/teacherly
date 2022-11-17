@@ -16,6 +16,9 @@ class LoginManager : AppCompatActivity() {
         setContentView(R.layout.login)
         auth = FirebaseAuth.getInstance()
 
+        RegisterButton.setOnClickListener(){
+            nav()
+        }
 
         LoginButton.setOnClickListener(){
             if(checkForInput()){
@@ -25,9 +28,9 @@ class LoginManager : AppCompatActivity() {
                     .addOnCompleteListener(this){
                         task->
                         if(task.isSuccessful){
-//                            var intent = Intent(applicationContext, MainActivity::class.java)
-//                            startActivity(intent)
-                          Toast.makeText(this, "Login Successfull", Toast.LENGTH_LONG).show()
+                            var intent = Intent(applicationContext, MainActivity::class.java)
+                            startActivity(intent)
+//                          Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
                         }else{
                             Toast.makeText(this, "Wrong Details", Toast.LENGTH_LONG).show()
                         }
@@ -38,6 +41,10 @@ class LoginManager : AppCompatActivity() {
         }
     }
 
+    private fun nav(){
+        val intent = Intent(this, RegisterManager::class.java)
+        startActivity(intent)
+    }
     private fun checkForInput(): Boolean {
         if(LoginEmail.text.toString().trim().isNotEmpty() && LoginPassword.text.toString().trim().isNotEmpty())
             return true

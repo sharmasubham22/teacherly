@@ -27,6 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".utils.RegisterManager"
+            android:label="Teacherly"></activity>
+        <activity android:name=".MainActivity"
+            android:label="Teacherly"></activity>
     </application>
 
 </manifest>
