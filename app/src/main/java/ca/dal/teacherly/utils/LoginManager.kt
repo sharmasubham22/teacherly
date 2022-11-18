@@ -29,7 +29,9 @@ class LoginManager : AppCompatActivity() {
                         task->
                         if(task.isSuccessful){
                             var intent = Intent(applicationContext, MainActivity::class.java)
+                            intent.putExtra("Email", email)
                             startActivity(intent)
+                            finish()
 //                          Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
                         }else{
                             Toast.makeText(this, "Wrong Details", Toast.LENGTH_LONG).show()

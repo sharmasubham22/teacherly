@@ -21,16 +21,19 @@
             android:name=".utils.LoginManager"
             android:exported="true"
             android:label="@string/app_name">
+
+        </activity>
+        <activity android:name=".utils.RegisterManager"
+            android:label="Teacherly"></activity>
+        <activity android:name=".MainActivity"
+            android:label="Teacherly"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".utils.RegisterManager"
-            android:label="Teacherly"></activity>
-        <activity android:name=".MainActivity"
-            android:label="Teacherly"></activity>
     </application>
 
 </manifest>
