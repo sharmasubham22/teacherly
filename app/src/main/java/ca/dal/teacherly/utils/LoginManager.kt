@@ -21,6 +21,11 @@ class LoginManager : AppCompatActivity() {
             nav()
         }
 
+        forgotPassword.setOnClickListener{
+            var intent = Intent(this, ResetPassword::class.java)
+            startActivity(intent)
+        }
+
         LoginButton.setOnClickListener(){
             if(checkForInput()){
                 val email = LoginEmail.text.toString()
