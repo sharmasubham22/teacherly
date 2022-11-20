@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
+import ca.dal.teacherly.ui.Menu.NotificationsFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.login.*
 
@@ -30,9 +31,9 @@ class LoginManager : AppCompatActivity() {
                         if(task.isSuccessful){
                             var intent = Intent(applicationContext, MainActivity::class.java)
                             intent.putExtra("Email", email)
+
                             startActivity(intent)
                             finish()
-//                          Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
                         }else{
                             Toast.makeText(this, "Wrong Details", Toast.LENGTH_LONG).show()
                         }

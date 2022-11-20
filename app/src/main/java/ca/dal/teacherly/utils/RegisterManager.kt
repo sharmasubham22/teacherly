@@ -37,7 +37,7 @@ class RegisterManager: AppCompatActivity() {
                 if(checkForInput()){
 
                     var type = btn.text.toString()
-                    var name = RegisterPassword.text.toString()
+                    var name = RegisterName.text.toString()
                     val email = RegisterEmail.text.toString()
                     val password = RegisterPassword.text.toString()
                     var confirmPassword = RegisterConfirmPassword.text.toString()

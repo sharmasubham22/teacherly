@@ -3,6 +3,7 @@ package ca.dal.teacherly
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -10,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.dal.teacherly.databinding.ActivityMainBinding
+import ca.dal.teacherly.ui.Menu.NotificationsFragment
 import ca.dal.teacherly.utils.LoginManager
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val sharedPref = this?.getPreferences(Context.MODE_PRIVATE)?:return
-        val isLogin = sharedPref.getString("Email","1")
+//        val isLogin = sharedPref.getString("Email","1")
 
         var email = intent.getStringExtra("Email")
         if(email!=null){
@@ -28,6 +30,16 @@ class MainActivity : AppCompatActivity() {
                 putString("Email", email)
                 apply()
             }
+
+            Log.v("Email", email)
+
+            val notifyFrag = NotificationsFragment()
+            val notifyBundle = Bundle()
+            notifyBundle.putString("Email", email.toString())
+            notifyFrag.arguments = notifyBundle
+            supportFragmentManager.beginTransaction().replace(R.id.navigation_notifications,notifyFrag)
+                .commit()
+
         }else{
             var intent = Intent(applicationContext, LoginManager::class.java)
             startActivity(intent)
