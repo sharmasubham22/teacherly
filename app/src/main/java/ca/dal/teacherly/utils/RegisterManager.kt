@@ -69,11 +69,18 @@ class RegisterManager: AppCompatActivity() {
                                         .addOnCompleteListener(this){
                                             task->
                                             if(task.isSuccessful){
-                                                users.document(email).set(user)
-                                                Toast.makeText(this, "Registration Successful for " + type, Toast.LENGTH_LONG).show()
-                                                var intent = Intent(this, LoginManager::class.java)
-                                                startActivity(intent)
-                                                finish()
+                                                auth.currentUser?.sendEmailVerification()
+                                                    ?.addOnSuccessListener {
+                                                        Toast.makeText(this, "Please verify your email!", Toast.LENGTH_LONG).show()
+                                                        users.document(email).set(user)
+                                                        Toast.makeText(this, "Registration Successful for " + type, Toast.LENGTH_LONG).show()
+                                                        var intent = Intent(this, LoginManager::class.java)
+                                                        startActivity(intent)
+                                                        finish()
+                                                    }
+                                                    ?.addOnFailureListener{
+                                                        Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
+                                                    }
                                             }else{
                                                 Toast.makeText(this, "Authentication Failed", Toast.LENGTH_LONG).show()
                                             }

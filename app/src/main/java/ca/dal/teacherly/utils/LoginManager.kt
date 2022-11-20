@@ -29,11 +29,16 @@ class LoginManager : AppCompatActivity() {
                     .addOnCompleteListener(this){
                         task->
                         if(task.isSuccessful){
-                            var intent = Intent(applicationContext, MainActivity::class.java)
-                            intent.putExtra("Email", email)
 
-                            startActivity(intent)
-                            finish()
+                            val verified = auth.currentUser?.isEmailVerified
+                            if(verified == true){
+                                var intent = Intent(applicationContext, MainActivity::class.java)
+                                intent.putExtra("Email", email)
+                                startActivity(intent)
+                                finish()
+                            }else{
+                                Toast.makeText(this, "Please verify your email!", Toast.LENGTH_LONG).show()
+                            }
                         }else{
                             Toast.makeText(this, "Wrong Details", Toast.LENGTH_LONG).show()
                         }
