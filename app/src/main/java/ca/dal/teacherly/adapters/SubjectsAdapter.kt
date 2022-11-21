@@ -3,11 +3,22 @@ package ca.dal.teacherly.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
+import ca.dal.teacherly.databinding.ActivityMainBinding.inflate
+import ca.dal.teacherly.databinding.CreateAssignmentBinding.inflate
+import ca.dal.teacherly.databinding.FragmentHomeBinding.inflate
+import ca.dal.teacherly.databinding.SubjectsCardLayoutBinding
+import ca.dal.teacherly.databinding.TutorCardLayoutBinding.inflate
 import ca.dal.teacherly.models.Subject
+import ca.dal.teacherly.ui.Subjects.SubjectsFragment
+import ca.dal.teacherly.ui.Subjects.SubjectsFragmentDirections
+import ca.dal.teacherly.MainActivity as MainActivity
 
 class SubjectsAdapter(private val subjects: List<Subject>) :
 
@@ -44,7 +55,15 @@ class SubjectsAdapter(private val subjects: List<Subject>) :
         val (subjectName, createdAt, updatedAt, subjectImageURL) = subjects[position]
         viewHolder.subjectTitleTv.text = subjectName
 
+        val btnSearchTutors = viewHolder.itemView.findViewById<Button>(R.id.btnSearchTutors)
+
+        btnSearchTutors.setOnClickListener{
+            val navController = Navigation.findNavController(viewHolder.itemView)
+            val action = SubjectsFragmentDirections.actionNavigationDashboardToSearchByLocation()
+            navController.navigate(action)
+        }
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = subjects.size
