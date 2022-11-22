@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "103399681948",
+    "project_id": "mobile-assignments-data",
+    "storage_bucket": "mobile-assignments-data.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103399681948:android:43a6b4c72adf7397be6259",
+        "android_client_info": {
+          "package_name": "ca.dal.teacherly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103399681948-82e48f5lird3jjnvs1keu9vburhfl3ba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdx9EFoGnz4NbuK4ke603RbhJotU_jKqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103399681948-82e48f5lird3jjnvs1keu9vburhfl3ba.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

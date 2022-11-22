@@ -6,30 +6,30 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/createAssignment"
-        android:layout_width="376dp"
+        android:id="@+id/titleAssignment"
+        android:layout_width="399dp"
         android:layout_height="45dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.094" />
+        app:layout_constraintTop_toBottomOf="@+id/assignmentTitle"
+        app:layout_constraintVertical_bias="0.016" />
 
     <EditText
         android:id="@+id/publishDate"
-        android:layout_width="375dp"
-        android:layout_height="55dp"
+        android:layout_width="399dp"
+        android:layout_height="45dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.223" />
+        app:layout_constraintTop_toBottomOf="@+id/datePublished"
+        app:layout_constraintVertical_bias="0.018" />
 
     <TextView
         android:id="@+id/assignmentTitle"
@@ -37,11 +37,11 @@
         android:layout_height="wrap_content"
         android:text="Title of Assignment"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="0.017"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.042" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.031" />
 
     <TextView
         android:id="@+id/datePublished"
@@ -49,11 +49,11 @@
         android:layout_height="wrap_content"
         android:text="Publish Date"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintHorizontal_bias="0.015"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174" />
+        app:layout_constraintTop_toBottomOf="@+id/titleAssignment"
+        app:layout_constraintVertical_bias="0.013" />
 
     <TextView
         android:id="@+id/submitDate"
@@ -61,62 +61,61 @@
         android:layout_height="wrap_content"
         android:text="Due Date"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307" />
+        app:layout_constraintTop_toBottomOf="@+id/publishDate"
+        app:layout_constraintVertical_bias="0.02" />
 
     <EditText
         android:id="@+id/dueDate"
-        android:layout_width="373dp"
-        android:layout_height="57dp"
+        android:layout_width="399dp"
+        android:layout_height="45dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375" />
+        app:layout_constraintTop_toBottomOf="@+id/submitDate"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/instructions"
+        android:id="@+id/EditText6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Instructions"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455" />
+        app:layout_constraintTop_toBottomOf="@+id/dueDate"
+        app:layout_constraintVertical_bias="0.032" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="375dp"
-        android:layout_height="108dp"
+        android:id="@+id/instructions"
+        android:layout_width="399dp"
+        android:layout_height="103dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.566" />
+        app:layout_constraintTop_toBottomOf="@+id/EditText6"
+        app:layout_constraintVertical_bias="0.035" />
 
     <TextView
         android:id="@+id/files"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="236dp"
         android:text="Attach Files here"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.793" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/saveAssignment"
@@ -131,40 +130,28 @@
 
     <ImageButton
         android:id="@+id/uploadFile"
-        android:layout_width="381dp"
-        android:layout_height="56dp"
+        android:layout_width="399dp"
+        android:layout_height="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.878"
+        app:layout_constraintVertical_bias="0.734"
         app:srcCompat="@drawable/ic_assignments" />
 
     <TextView
-        android:id="@+id/editText"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Session Number"
+        android:fontFamily="sans-serif"
+        android:text="Create a new assignment"
+        android:textSize="28dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.66" />
-
-    <EditText
-        android:id="@+id/session"
-        android:layout_width="376dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="500dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.049" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
