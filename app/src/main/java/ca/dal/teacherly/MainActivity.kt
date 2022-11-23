@@ -16,10 +16,13 @@ import ca.dal.teacherly.ui.Menu.NotificationsFragment
 import ca.dal.teacherly.utils.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +32,22 @@ class MainActivity : AppCompatActivity() {
 
         var email = intent.getStringExtra("Email")
         if (email != null) {
-            with(sharedPref.edit()) {
-                putString("Email", email)
-                apply()
+            auth = FirebaseAuth.getInstance()
+            db = FirebaseFirestore.getInstance()
+
+
+            val ref = db.collection("USERS").document(email)
+            ref.get().addOnSuccessListener {
+                if(it!=null){
+                   var fetchedType = it.data?.get("Type")?.toString().toString()
+                    with(sharedPref.edit()) {
+                        putString("Email", email)
+                        putString("Type", fetchedType)
+                        apply()
+                    }
+                    println("Email in main $email")
+                    println("Type in main: $fetchedType")
+                }
             }
         } else {
             var intent = Intent(applicationContext, LoginManager::class.java)
