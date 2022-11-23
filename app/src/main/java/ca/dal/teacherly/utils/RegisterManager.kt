@@ -73,7 +73,7 @@ class RegisterManager: AppCompatActivity() {
                                                     ?.addOnSuccessListener {
                                                         Toast.makeText(this, "Please verify your email!", Toast.LENGTH_LONG).show()
                                                         users.document(email).set(user)
-                                                        Toast.makeText(this, "Registration Successful for " + type, Toast.LENGTH_LONG).show()
+                                                        Toast.makeText(this, "Registration successful for $type", Toast.LENGTH_LONG).show()
                                                         var intent = Intent(this, LoginManager::class.java)
                                                         startActivity(intent)
                                                         finish()
@@ -118,9 +118,9 @@ class RegisterManager: AppCompatActivity() {
     private fun checkForInput(): Boolean {
         if(RegisterName.text.toString().trim().isNotEmpty() && RegisterEmail.text.toString().trim().isNotEmpty()
             && RegisterPassword.text.toString().trim().isNotEmpty() && RegisterConfirmPassword.text.toString().trim().isNotEmpty()
-            && RegisterMobile.text.toString().trim().isNotEmpty() && RegisterStreetName.text.toString().trim().isNotEmpty()
-            && RegisterCity.text.toString().trim().isNotEmpty() && RegisterProvince.text.toString().trim().isNotEmpty()
-            && RegisterPostalCode.text.toString().trim().isNotEmpty()){
+            && RegisterMobile.text.toString().trim().isNotEmpty()
+            && RegisterStreetName.text.toString().trim().isNotEmpty() && RegisterCity.text.toString().trim().isNotEmpty()
+            && RegisterProvince.text.toString().trim().isNotEmpty() && RegisterPostalCode.text.toString().trim().isNotEmpty()){
             return true
         }
         return false

@@ -57,6 +57,9 @@ class EditProfile: AppCompatActivity() {
                 postalCode.text = fetchedPostalCode
             }
         }
+
+
+
     }
     private fun checkForInput(): Boolean {
         if(editName.text.toString().trim().isNotEmpty() && editMobile.text.toString().trim().isNotEmpty()
