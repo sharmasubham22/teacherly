@@ -9,12 +9,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Feedback"
+        android:textSize="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.467" />
+
+    <ImageView
+        android:id="@+id/backBtnImage"
+        android:layout_width="38dp"
+        android:layout_height="30dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.041"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <TextView
+        android:id="@+id/teacherDetailsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.204"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.041" />
 
     <EditText
         android:id="@+id/feedback"
@@ -44,6 +72,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please share your feedback"
+        android:textSize="22dp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -53,9 +83,12 @@
 
     <TextView
         android:id="@+id/editTextNumber"
-        android:layout_width="31dp"
-        android:layout_height="13dp"
+        android:layout_width="55dp"
+        android:layout_height="53dp"
         android:text="5"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
