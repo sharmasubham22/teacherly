@@ -3,13 +3,20 @@ package ca.dal.teacherly
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import ca.dal.teacherly.databinding.ActivityMainBinding
+import ca.dal.teacherly.ui.Menu.NotificationsFragment
 import ca.dal.teacherly.utils.LoginManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +29,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val sharedPref = this?.getPreferences(Context.MODE_PRIVATE) ?: return
+
+        val subjectController = SubjectController()
+        val data = subjectController.getAllSubjects()
 
         var email = intent.getStringExtra("Email")
         if (email != null) {
