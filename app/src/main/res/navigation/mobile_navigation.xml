@@ -15,17 +15,20 @@
         android:id="@+id/navigationDashboardFragment"
         android:name="ca.dal.teacherly.ui.Subjects.SubjectsFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_subjects" />
+        tools:layout="@layout/fragment_subjects" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_searchByLocation"
+            app:destination="@id/searchByLocation" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigationFragment"
         android:name="ca.dal.teacherly.ui.Menu.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_menu" >
-    </fragment>
-<!--    <fragment-->
-<!--        android:id="@+id/editProfile2"-->
-<!--        android:name="ca.dal.teacherly.utils.EditProfile"-->
-<!--        android:label="EditProfile"-->
-<!--        tools:layout="@layout/edit_profile"/>-->
+        tools:layout="@layout/fragment_menu" />
+    <fragment
+        android:id="@+id/searchByLocation"
+        android:name="ca.dal.teacherly.SearchByLocation"
+        android:label="@string/list_of_tutors"
+        tools:layout="@layout/fragment_search_by_location" />
 </navigation>
