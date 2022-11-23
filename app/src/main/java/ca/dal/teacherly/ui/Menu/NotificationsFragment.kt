@@ -71,13 +71,6 @@ class NotificationsFragment : Fragment(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-        // val edit = root.findViewById(R.id.editP) as TextView
-
-//        edit.setOnClickListener{
-//            val intent = Intent(activity, EditProfile::class.java)
-//            startActivity(intent)
-//        }
-
         val navigationView: NavigationView = root.findViewById(R.id.homeMenu)
         navigationView.setNavigationItemSelectedListener(this)
         navigationView.setOnClickListener{
