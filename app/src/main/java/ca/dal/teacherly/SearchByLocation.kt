@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -18,6 +19,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import kotlinx.android.synthetic.main.fragment_search_by_location.*
+import kotlinx.android.synthetic.main.fragment_search_by_location.view.*
 
 class SearchByLocation : Fragment() {
 
@@ -26,6 +29,9 @@ class SearchByLocation : Fragment() {
     private val permissionCode = 101
 
     private var locationArrayList = ArrayList<LatLng>()
+
+    var startPoint = 0
+    var endPoint = 0
 
 //    var TamWorth = LatLng(-31.083332, 150.916672)
 //    var NewCastle = LatLng(-32.916668, 151.750000)
@@ -103,6 +109,23 @@ class SearchByLocation : Fragment() {
         fetchLocation()
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        seekBar3.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progresss: Int, fromUser: Boolean) {
+                editTextNumber.setText(progresss.toString())
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                startPoint = seekBar!!.progress
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                endPoint = seekBar!!.progress
+            }
+        })
     }
 
     @SuppressLint("MissingPermission")
