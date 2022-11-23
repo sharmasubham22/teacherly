@@ -35,20 +35,20 @@ class MainActivity : AppCompatActivity() {
             auth = FirebaseAuth.getInstance()
             db = FirebaseFirestore.getInstance()
 
-            var fetchedType : String = ""
+
             val ref = db.collection("USERS").document(email)
             ref.get().addOnSuccessListener {
                 if(it!=null){
-                    fetchedType = it.data?.get("Type")?.toString().toString()
+                   var fetchedType = it.data?.get("Type")?.toString().toString()
+                    with(sharedPref.edit()) {
+                        putString("Email", email)
+                        putString("Type", fetchedType)
+                        apply()
+                    }
+                    println("Email in main $email")
+                    println("Type in main: $fetchedType")
                 }
             }
-
-            with(sharedPref.edit()) {
-                putString("Email", email)
-                putString("Type", fetchedType)
-                apply()
-            }
-            println("Type in main: $fetchedType")
         } else {
             var intent = Intent(applicationContext, LoginManager::class.java)
             startActivity(intent)
