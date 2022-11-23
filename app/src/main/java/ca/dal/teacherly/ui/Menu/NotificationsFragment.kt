@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
 import ca.dal.teacherly.databinding.FragmentMenuBinding
+import ca.dal.teacherly.utils.AssignmentManager
 import ca.dal.teacherly.utils.EditProfile
 import ca.dal.teacherly.utils.ResetPassword
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -83,6 +84,10 @@ class NotificationsFragment : Fragment(), NavigationView.OnNavigationItemSelecte
                         bundle)
                     true
                 }
+                R.id.my_assignments -> {
+                    findNavController().navigate(R.id.my_assignments)
+                    true
+                }
                 else -> false
             }
         }
@@ -101,6 +106,11 @@ class NotificationsFragment : Fragment(), NavigationView.OnNavigationItemSelecte
                 val receivedEmail = data?.get("Email").toString()
                 val intent = Intent(activity, EditProfile::class.java)
                 intent.putExtra("Email", receivedEmail)
+                startActivity(intent)
+                true
+            }
+            R.id.my_assignments ->{
+                val intent = Intent(activity, AssignmentManager::class.java)
                 startActivity(intent)
                 true
             }

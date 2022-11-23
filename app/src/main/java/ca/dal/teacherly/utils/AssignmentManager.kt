@@ -1,5 +1,6 @@
 package ca.dal.teacherly.utils
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -16,7 +17,7 @@ class AssignmentManager: AppCompatActivity() {
     lateinit var publishOn: EditText
     lateinit var due: EditText
     lateinit var inst: EditText
-
+    lateinit var viewbtn: Button
     lateinit var create: Button
 
     private lateinit var auth: FirebaseAuth
@@ -26,14 +27,23 @@ class AssignmentManager: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView((R.layout.create_assignment))
 
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+
         assigntitle = findViewById((R.id.titleAssignment))
         publishOn = findViewById(R.id.publishDate)
         due = findViewById(R.id.dueDate)
         inst = findViewById(R.id.instructions)
         create = findViewById(R.id.saveAssignment)
+        viewbtn=findViewById(R.id.view)
 
         create.setOnClickListener {
             saveAssignment()
+        }
+
+        viewbtn.setOnClickListener {
+        val intent= Intent(this,AssignmentView::class.java)
+            startActivity(intent)
         }
     }
 
@@ -59,10 +69,22 @@ class AssignmentManager: AppCompatActivity() {
             inst.error = "Please enter the instructions for the assignment"
             return
         }
+
         val assignment:MutableMap<String, Any> = HashMap()
-        assignment["id"]
-        val assigns = db.collection("Assignments")
-        assigns.add(assignment)
+
+        assignment["Title"]=title
+        assignment["PublishDate"]=pubDate
+        assignment["DueDate"]=dues
+        assignment["Instructions"]=assigninstr
+
+        db.collection("ASSIGNMENTS").document(title)
+            .set(assignment)
+            .addOnSuccessListener {
+                Toast.makeText(this,"Assignment Saved Successfuly", Toast.LENGTH_LONG).show()
+            }
+            .addOnFailureListener{
+                Toast.makeText(this,"Assignment Creation failed", Toast.LENGTH_LONG).show()
+        }
 //        val assignment_id=ref.push().key
 //        val assign = Assignments(assignment_id, title, pubDate, dues, assigninstr)
 //
