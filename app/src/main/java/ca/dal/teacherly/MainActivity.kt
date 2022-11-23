@@ -3,20 +3,13 @@ package ca.dal.teacherly
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import ca.dal.teacherly.databinding.ActivityMainBinding
-import ca.dal.teacherly.ui.Menu.NotificationsFragment
 import ca.dal.teacherly.utils.LoginManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,8 +31,8 @@ class MainActivity : AppCompatActivity() {
 
             val ref = db.collection("USERS").document(email)
             ref.get().addOnSuccessListener {
-                if(it!=null){
-                   var fetchedType = it.data?.get("Type")?.toString().toString()
+                if (it != null) {
+                    var fetchedType = it.data?.get("Type")?.toString().toString()
                     with(sharedPref.edit()) {
                         putString("Email", email)
                         putString("Type", fetchedType)
@@ -72,8 +65,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_notifications -> {
                     val bundle = Bundle()
                     bundle.putString("Email", email.toString())
-                    findNavController(R.id.nav_host_fragment_activity_main).navigate(R.id.navigationFragment,
-                        bundle)
+                    findNavController(R.id.nav_host_fragment_activity_main).navigate(
+                        R.id.navigationFragment,
+                        bundle
+                    )
                     true
                 }
                 else -> false
