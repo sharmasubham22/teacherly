@@ -3,6 +3,7 @@ package ca.dal.teacherly
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,8 +17,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 
 class SearchByLocation : Fragment() {
 
@@ -25,14 +25,56 @@ class SearchByLocation : Fragment() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val permissionCode = 101
 
+    private var locationArrayList = ArrayList<LatLng>()
+
+
+    var TamWorth = LatLng(-31.083332, 150.916672)
+    var NewCastle = LatLng(-32.916668, 151.750000)
+    var Brisbane = LatLng(-27.470125, 153.021072)
+
     private val callback = OnMapReadyCallback { googleMap ->
 
-        val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
-        val markerOptions = MarkerOptions().position(latLng).title("Current location")
+        locationArrayList!!.add(TamWorth)
+        locationArrayList!!.add(NewCastle)
+        locationArrayList!!.add(Brisbane)
 
-        googleMap?.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-        googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        googleMap?.addMarker(markerOptions)
+        var markerOptions = ArrayList<MarkerOptions>()
+
+        for (i in locationArrayList!!) {
+
+            var result = FloatArray(3)
+
+            Location.distanceBetween(
+                NewCastle.latitude,
+                NewCastle.longitude,
+                i.latitude,
+                i.longitude,
+                result
+            )
+
+            println(result[0])
+
+            if (result[0] <= (282 * 1000)) {
+
+                val markerOption = MarkerOptions().position(i).title("Current location")
+                googleMap.animateCamera(CameraUpdateFactory.newLatLng(i))
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(i, 15f))
+
+                markerOptions!!.add(markerOption)
+
+            }
+        }
+
+//
+        var circle = CircleOptions().center(NewCastle).radius(282.00 * 1000).strokeColor(Color.RED)//.zIndex(0f)
+        googleMap.addCircle(circle)
+
+        for (mo in markerOptions!!) {
+            googleMap.addMarker(mo)
+        }
+//
+//        var circle = CircleOptions().radius(282.00 * 1000).strokeColor(Color.RED)
+//        googleMap.addCircle(circle)
     }
 
     override fun onCreateView(
