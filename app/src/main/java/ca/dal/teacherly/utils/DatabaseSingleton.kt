@@ -1,30 +1,29 @@
 package ca.dal.teacherly.utils
 
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
 
 object DatabaseSingleton {
 
-    private val database = Firebase.database
-    private val usersReference = database.getReference("USERS")
-    private val subjectsReference = database.getReference("SUBJECTS")
-    private val coursesReference = database.getReference("COURSES")
-    private val assignmentsReference = database.getReference("ASSIGNMENTS")
+    private val database = FirebaseFirestore.getInstance()
+    private val usersReference = database.collection("USERS")
+    private val subjectsReference = database.collection("SUBJECTS")
+    private val coursesReference = database.collection("COURSES")
+    private val assignmentsReference = database.collection("ASSIGNMENTS")
 
-    fun getUserReference(): DatabaseReference {
+    fun getUserReference(): CollectionReference {
         return usersReference
     }
 
-    fun getSubjectsReference(): DatabaseReference {
+    fun getSubjectsReference(): CollectionReference {
         return subjectsReference
     }
 
-    fun getCourseReference(): DatabaseReference {
+    fun getCourseReference(): CollectionReference {
         return coursesReference
     }
 
-    fun getAssignmentReference(): DatabaseReference {
+    fun getAssignmentReference(): CollectionReference {
         return assignmentsReference
     }
 }
