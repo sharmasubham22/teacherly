@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ca.dal.teacherly.R
 import ca.dal.teacherly.models.Assignments
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 
 class AssignmentManager: AppCompatActivity() {
     lateinit var assigntitle: EditText
@@ -17,6 +19,9 @@ class AssignmentManager: AppCompatActivity() {
 
     lateinit var create: Button
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView((R.layout.create_assignment))
@@ -25,7 +30,6 @@ class AssignmentManager: AppCompatActivity() {
         publishOn = findViewById(R.id.publishDate)
         due = findViewById(R.id.dueDate)
         inst = findViewById(R.id.instructions)
-
         create = findViewById(R.id.saveAssignment)
 
         create.setOnClickListener {
@@ -55,15 +59,15 @@ class AssignmentManager: AppCompatActivity() {
             inst.error = "Please enter the instructions for the assignment"
             return
         }
-
-
-        val ref = FirebaseDatabase.getInstance().getReference("Assignments")
-
-        val assignment_id=ref.push().key
-        val assign = Assignments(assignment_id, title, pubDate, dues, assigninstr)
-
-        ref.child(assignment_id.toString()).setValue(assign).addOnCompleteListener{
-            Toast.makeText(applicationContext,"Assignment Saved Successfuly", Toast.LENGTH_LONG).show()
-        }
+        val assignment:MutableMap<String, Any> = HashMap()
+        assignment["id"]
+        val assigns = db.collection("Assignments")
+        assigns.add(assignment)
+//        val assignment_id=ref.push().key
+//        val assign = Assignments(assignment_id, title, pubDate, dues, assigninstr)
+//
+//        ref.child(assignment_id.toString()).setValue(assign).addOnCompleteListener{
+//            Toast.makeText(applicationContext,"Assignment Saved Successfuly", Toast.LENGTH_LONG).show()
+//        }
     }
 }
