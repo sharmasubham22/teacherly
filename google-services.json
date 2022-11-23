@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "114127155405",
-    "project_id": "teacherly-7e70d",
-    "storage_bucket": "teacherly-7e70d.appspot.com"
+    "project_number": "437842235410",
+    "project_id": "teacherly-b5eff",
+    "storage_bucket": "teacherly-b5eff.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:114127155405:android:afa0cd957a7b7a33603984",
+        "mobilesdk_app_id": "1:437842235410:android:f0415d71b28abcdef988cb",
         "android_client_info": {
           "package_name": "ca.dal.teacherly"
         }
       },
       "oauth_client": [
         {
-          "client_id": "114127155405-26t537hs460tls81ff0q400v9ubnsv0q.apps.googleusercontent.com",
+          "client_id": "437842235410-h38mb7lr7uphjli1r11ho5c7ip8mldpl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB6c14OPgG7rHgT9TZIOZYxbw1ifJ_MImk"
+          "current_key": "AIzaSyD94LNEre8rNsV5xRa2vETiG5en66GkE2o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "114127155405-26t537hs460tls81ff0q400v9ubnsv0q.apps.googleusercontent.com",
+              "client_id": "437842235410-h38mb7lr7uphjli1r11ho5c7ip8mldpl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
