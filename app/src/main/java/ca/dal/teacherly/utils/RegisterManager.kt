@@ -1,6 +1,7 @@
 package ca.dal.teacherly.utils
 
 import android.content.Intent
+import android.location.Geocoder
 import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -12,6 +13,7 @@ import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.maps.android.data.geojson.GeoJsonPoint
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.registration.*
 
@@ -46,6 +48,10 @@ class RegisterManager: AppCompatActivity() {
                     var city = RegisterCity.text.toString()
                     var province = RegisterProvince.text.toString()
                     var postalCode = RegisterPostalCode.text.toString()
+//                    var p = geocoder.getFromLocationName(streetName, 1)
+                    var p = Geocoder(this).getFromLocationName("$streetName, $city, $province, $postalCode", 1)[0]
+                    var latitude = p.latitude
+                    var longitude =  p.longitude
 
                     if(password == confirmPassword){
 
@@ -57,7 +63,9 @@ class RegisterManager: AppCompatActivity() {
                             "Street Name" to streetName,
                             "City" to city,
                             "Province" to province,
-                            "Postal Code" to postalCode
+                            "Postal Code" to postalCode,
+                            "Latitude" to latitude,
+                            "Longitude" to longitude
                         )
 
                         val users = db.collection("USERS")
@@ -71,6 +79,8 @@ class RegisterManager: AppCompatActivity() {
                                             if(task.isSuccessful){
                                                 auth.currentUser?.sendEmailVerification()
                                                     ?.addOnSuccessListener {
+                                                        println("Lat: $latitude")
+                                                        println("Lon: $longitude")
                                                         Toast.makeText(this, "Please verify your email!", Toast.LENGTH_LONG).show()
                                                         users.document(email).set(user)
                                                         Toast.makeText(this, "Registration Successful for " + type, Toast.LENGTH_LONG).show()
