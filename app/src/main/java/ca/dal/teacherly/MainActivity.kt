@@ -1,64 +1,61 @@
 package ca.dal.teacherly
 
-import android.Manifest
-import android.content.pm.PackageManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import ca.dal.teacherly.databinding.ActivityMainBinding
+import ca.dal.teacherly.utils.LoginManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_search_by_location)
+
+        val sharedPref = this?.getPreferences(Context.MODE_PRIVATE) ?: return
+
+        var email = intent.getStringExtra("Email")
+        if (email != null) {
+            with(sharedPref.edit()) {
+                putString("Email", email)
+                apply()
+            }
+        } else {
+            var intent = Intent(applicationContext, LoginManager::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
-
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                101
-            )
-        }
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        )
-        {
-
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                101
-            )
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.nav_view)
+        bottomNavigationView.setOnItemSelectedListener { it ->
+            when (it.itemId) {
+                R.id.navigation_home -> {
+                    findNavController(R.id.nav_host_fragment_activity_main).navigate(R.id.navigationHomeFragment)
+                    true
+                }
+                R.id.navigation_dashboard -> {
+                    findNavController(R.id.nav_host_fragment_activity_main).navigate(R.id.navigationDashboardFragment)
+                    true
+                }
+                R.id.navigation_notifications -> {
+                    val bundle = Bundle()
+                    bundle.putString("Email", email.toString())
+                    findNavController(R.id.nav_host_fragment_activity_main).navigate(
+                        R.id.navigationFragment,
+                        bundle
+                    )
+                    true
+                }
+                else -> false
+            }
         }
     }
 }

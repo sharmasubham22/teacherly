@@ -33,9 +33,19 @@
             android:value="${GOOGLE_MAPS_API_KEY}" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".utils.LoginManager"
             android:exported="true"
             android:label="@string/app_name">
+        </activity>
+        <activity android:name=".utils.ResetPassword"
+            android:label="Teacherly"></activity>
+        <activity android:name=".utils.EditProfile"
+            android:label="Teacherly"></activity>
+        <activity android:name=".utils.RegisterManager"
+            android:label="Teacherly"></activity>
+        <activity android:name=".MainActivity"
+            android:label="Teacherly"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,3 +55,5 @@
     </application>
 
 </manifest>
+
+<!--    android:name=".MainActivity"-->

@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigationHomeFragment">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigationHomeFragment"
         android:name="ca.dal.teacherly.ui.Home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigationDashboardFragment"
         android:name="ca.dal.teacherly.ui.Subjects.SubjectsFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_subjects" >
@@ -22,7 +22,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigationFragment"
         android:name="ca.dal.teacherly.ui.Menu.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_menu" />
