@@ -21,5 +21,11 @@
         android:id="@+id/navigationFragment"
         android:name="ca.dal.teacherly.ui.Menu.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu" >
+    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/editProfile2"-->
+<!--        android:name="ca.dal.teacherly.utils.EditProfile"-->
+<!--        android:label="EditProfile"-->
+<!--        tools:layout="@layout/edit_profile"/>-->
 </navigation>

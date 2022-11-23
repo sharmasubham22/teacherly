@@ -1,34 +1,43 @@
 package ca.dal.teacherly.ui.Menu
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
 import ca.dal.teacherly.databinding.FragmentMenuBinding
+import ca.dal.teacherly.utils.EditProfile
+import ca.dal.teacherly.utils.ResetPassword
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_menu.*
+import org.w3c.dom.Text
 
 
-class NotificationsFragment : Fragment() {
+class NotificationsFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
 
 
     private var _binding: FragmentMenuBinding? = null
-    private lateinit var textV : TextView
+    // private lateinit var textV : TextView
     private lateinit var phone : TextView
     private lateinit var name : TextView
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
 
+    // private lateinit var navC : NavController
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -62,25 +71,48 @@ class NotificationsFragment : Fragment() {
             }
         }
 
-//        val navigationView: NavigationView = homeMenu
-//        navigationView.setOnClickListener{
-//            when(it.id){
-//                R.id.edit_profile -> {
-//                    val bundle = Bundle()
-//                    bundle.putString("Email", receivedEmail)
-//                    findNavController().navigate(R.id.edit_profile,
-//                        bundle)
-//                    true
-//                }
-//                else -> false
-//            }
+        // val edit = root.findViewById(R.id.editP) as TextView
+
+//        edit.setOnClickListener{
+//            val intent = Intent(activity, EditProfile::class.java)
+//            startActivity(intent)
 //        }
 
+        val navigationView: NavigationView = root.findViewById(R.id.homeMenu)
+        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.setOnClickListener{
+            when(it.id){
+                R.id.edit_profile -> {
+                    val bundle = Bundle()
+                    bundle.putString("Email", receivedEmail)
+                    println("Edit Profile: $receivedEmail")
+                    findNavController().navigate(R.id.edit_profile,
+                        bundle)
+                    true
+                }
+                else -> false
+            }
+        }
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.edit_profile -> {
+                val data = arguments
+                val receivedEmail = data?.get("Email").toString()
+                val intent = Intent(activity, EditProfile::class.java)
+                intent.putExtra("Email", receivedEmail)
+                startActivity(intent)
+                true
+            }
+        }
+
+        return true
     }
 }

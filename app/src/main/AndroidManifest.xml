@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".utils.ResetPassword"
             android:label="Teacherly"></activity>
+        <activity android:name=".utils.EditProfile"
+            android:label="Teacherly"></activity>
         <activity android:name=".utils.RegisterManager"
             android:label="Teacherly"></activity>
         <activity android:name=".MainActivity"
