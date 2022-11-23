@@ -27,11 +27,14 @@ class SearchByLocation : Fragment() {
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val permissionCode = 101
+    private lateinit var mapCircle: Circle;
 
     private var locationArrayList = ArrayList<LatLng>()
 
     var startPoint = 0
     var endPoint = 0
+
+    private lateinit var circle: CircleOptions
 
 //    var TamWorth = LatLng(-31.083332, 150.916672)
 //    var NewCastle = LatLng(-32.916668, 151.750000)
@@ -54,8 +57,8 @@ class SearchByLocation : Fragment() {
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
         googleMap.addMarker(userLocationMarker)
 
-        val circle = CircleOptions().center(latLng).radius(1.00 * 1000).strokeColor(Color.RED)
-        googleMap.addCircle(circle)
+        circle = CircleOptions().center(latLng).radius(1000.00).strokeColor(Color.RED)
+        mapCircle = googleMap.addCircle(circle)
 
         val markerOptions = ArrayList<MarkerOptions>()
 
@@ -116,6 +119,8 @@ class SearchByLocation : Fragment() {
         seekBar3.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progresss: Int, fromUser: Boolean) {
                 editTextNumber.setText(progresss.toString())
+                mapCircle.radius = progresss.toDouble()*1000
+
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
