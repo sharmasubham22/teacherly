@@ -1,8 +1,12 @@
 package ca.dal.teacherly.controllers
 
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import ca.dal.teacherly.adapters.SubjectsAdapter
 import ca.dal.teacherly.data.InitialSubjects
+import ca.dal.teacherly.databinding.FragmentSubjectsBinding
 import ca.dal.teacherly.models.Subject
 import ca.dal.teacherly.models.Tutor
 import ca.dal.teacherly.utils.Constants
@@ -26,7 +30,7 @@ class SubjectController {
 
     companion object {
 
-        fun initializeSubjectsFromFirebase(auth: FirebaseAuth, db : FirebaseFirestore) {
+        fun initializeSubjectsFromFirebase(auth: FirebaseAuth, db : FirebaseFirestore, _binding : FragmentSubjectsBinding, ctx: Context?) {
             var ref = db.collection(Constants.FB_SUBJECTS_SCHEMA).get();
             InitialSubjects.clearAll();
             ref.addOnSuccessListener {
@@ -45,6 +49,9 @@ class SubjectController {
                             subjectImageURL
                         )
                     );
+
+                    _binding!!.subjectsList.adapter = SubjectsAdapter(InitialSubjects.getAll())
+                    _binding!!.subjectsList.layoutManager = GridLayoutManager(ctx, 2, GridLayoutManager.VERTICAL, false)
                 }
             }
         }

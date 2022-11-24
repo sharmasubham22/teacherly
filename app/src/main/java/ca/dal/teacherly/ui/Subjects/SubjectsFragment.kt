@@ -44,10 +44,8 @@ class SubjectsFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        SubjectController.initializeSubjectsFromFirebase(auth, db)
+        SubjectController.initializeSubjectsFromFirebase(auth, db, _binding!!, this.context)
 
-        _binding!!.subjectsList.adapter = SubjectsAdapter(InitialSubjects.getAll())
-        _binding!!.subjectsList.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL, false)
 
         return root
     }
