@@ -24,11 +24,6 @@ class EditProfile: AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
 
-//    private lateinit var image : ImageView
-//    private lateinit var selectImage: Button
-//    private lateinit var save : Button
-
-
     private lateinit var phone : TextView
     private lateinit var name : TextView
     private lateinit var street : TextView
@@ -39,13 +34,6 @@ class EditProfile: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_profile)
-
-//        image = findViewById(R.id.profileImage)
-//        selectImage = findViewById(R.id.uploadImage)
-//        save = findViewById(R.id.editProfileButton)
-
-
-
 
         var email = intent.getStringExtra("Email").toString()
         println("Edit Profile Email: $email")
@@ -79,9 +67,7 @@ class EditProfile: AppCompatActivity() {
             }
         }
 
-
         editProfileButton.setOnClickListener{
-
             var name1 = name.text.toString()
             var mobileNumber1 = phone.text.toString()
             var streetName1 = street.text.toString()
@@ -115,7 +101,6 @@ class EditProfile: AppCompatActivity() {
                     }
                 }
         }
-
     }
     private fun checkForInput(): Boolean {
         if(editName.text.toString().trim().isNotEmpty() && editMobile.text.toString().trim().isNotEmpty()
