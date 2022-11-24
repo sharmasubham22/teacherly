@@ -1,4 +1,5 @@
 package ca.dal.teacherly.models
 
-class Sessions {
-}
+import java.util.*
+
+data class Sessions (val bookingId: String, val bookingDate: String, val description: String, val subject: String);

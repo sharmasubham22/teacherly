@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Booking ID"
+        android:id="@+id/bookingId"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subject"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:id="@+id/bookingSubject"
+                android:background="@color/design_default_color_secondary"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:padding="5dp"
+                android:textSize="16sp"
+                android:gravity="right"
+                android:id="@+id/bookingDate"
+                android:layout_weight="1"/>
+
+        </LinearLayout>̵
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
