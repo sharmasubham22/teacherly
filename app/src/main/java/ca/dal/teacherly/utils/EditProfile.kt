@@ -1,12 +1,17 @@
 package ca.dal.teacherly.utils
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import ca.dal.teacherly.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.edit_profile.*
 import kotlinx.android.synthetic.main.registration.*
 
@@ -14,6 +19,11 @@ class EditProfile: AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+
+//    private lateinit var image : ImageView
+//    private lateinit var selectImage: Button
+//    private lateinit var save : Button
+
 
     private lateinit var phone : TextView
     private lateinit var name : TextView
@@ -25,6 +35,13 @@ class EditProfile: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_profile)
+
+//        image = findViewById(R.id.profileImage)
+//        selectImage = findViewById(R.id.uploadImage)
+//        save = findViewById(R.id.editProfileButton)
+
+
+
 
         var email = intent.getStringExtra("Email").toString()
         println("Edit Profile Email: $email")
@@ -57,8 +74,6 @@ class EditProfile: AppCompatActivity() {
                 postalCode.text = fetchedPostalCode
             }
         }
-
-
 
     }
     private fun checkForInput(): Boolean {
