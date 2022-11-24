@@ -9,10 +9,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import ca.dal.teacherly.models.LocationModel
+import ca.dal.teacherly.models.Tutor
+import ca.dal.teacherly.utils.DatabaseSingleton
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -26,15 +28,17 @@ class SearchByLocation : Fragment() {
 
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
     private val permissionCode = 101
-    private lateinit var mapCircle: Circle;
 
-    private var locationArrayList = ArrayList<LatLng>()
-
-    var startPoint = 0
-    var endPoint = 0
-
+    private lateinit var mapCircle: Circle
     private lateinit var circle: CircleOptions
+
+    private var teacherList: ArrayList<Tutor>? = arrayListOf()
+
+    //    var startPoint = 0
+//    var endPoint = 0
+//    private var locationArrayList = ArrayList<LatLng>()
 
 //    var TamWorth = LatLng(-31.083332, 150.916672)
 //    var NewCastle = LatLng(-32.916668, 151.750000)
@@ -46,50 +50,52 @@ class SearchByLocation : Fragment() {
 //        locationArrayList!!.add(NewCastle)
 //        locationArrayList!!.add(Brisbane)
 
-        locationArrayList.add(LatLng(44.6363833242448, -63.587331330932855))
-        locationArrayList.add(LatLng(44.63698644071133, -63.58929470783781))
 
-        val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
-        val userLocationMarker = MarkerOptions().position(latLng).title("Current location")
+//        locationArrayList.add(LatLng(44.6363833242448, -63.587331330932855))
+//        locationArrayList.add(LatLng(44.63698644071133, -63.58929470783781))
+
+        val userLatLng = LatLng(currentLocation.latitude, currentLocation.longitude)
+        val userLocationMarker = MarkerOptions().position(userLatLng).title("Current location")
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
 
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLng(userLatLng))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 15f))
         googleMap.addMarker(userLocationMarker)
 
-        circle = CircleOptions().center(latLng).radius(1000.00).strokeColor(Color.RED)
+        circle = CircleOptions().center(userLatLng).radius(RADIUS).strokeColor(Color.RED)
         mapCircle = googleMap.addCircle(circle)
 
         val markerOptions = ArrayList<MarkerOptions>()
 
-        for (i in locationArrayList.indices) {
+//        Log.d("TeacherList ","${teacherList!![0]}")
+        for (i in teacherList!!) {
 
-            var result = FloatArray(3)
+            val result = FloatArray(3)
 
             Location.distanceBetween(
-                latLng.latitude,
-                latLng.longitude,
-                locationArrayList[i].latitude,
-                locationArrayList[i].longitude,
+                userLatLng.latitude,
+                userLatLng.longitude,
+                i.latitude,
+                i.longitude,
                 result
             )
 
             println(result[0])
 
-            if (result[0] <= (1 * 1000)) {
+            if (result[0] <= RADIUS) {
+
+                val teacherLatLong = LatLng(i.latitude, i.longitude)
 
                 val markerOption =
-                    MarkerOptions().position(locationArrayList[i]).title("Professor " + (i + 1))
-                googleMap.animateCamera(CameraUpdateFactory.newLatLng(locationArrayList[i]))
+                    MarkerOptions().position(teacherLatLong).title(i.tutorName)
+                googleMap.animateCamera(CameraUpdateFactory.newLatLng(teacherLatLong))
                 googleMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(
-                        locationArrayList[i],
-                        15f
+                        teacherLatLong,
+                        11F
                     )
                 )
-
                 markerOptions.add(markerOption)
-
             }
         }
 
@@ -106,32 +112,42 @@ class SearchByLocation : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_search_by_location, container, false)
+
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(this.requireActivity())
 
-        fetchLocation()
+        val query = DatabaseSingleton.getUserReference().whereEqualTo("Type", "Teacher")
 
+        query.get()
+            .addOnSuccessListener { documents ->
+                val locationModel = LocationModel()
+                teacherList = locationModel.getTeacherList(documents)
+                fetchLocation()
+            }
+//            .addOnFailureListener {
+//
+//            }
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        seekBar3.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progresss: Int, fromUser: Boolean) {
-                editTextNumber.setText(progresss.toString())
-                mapCircle.radius = progresss.toDouble()*1000
-
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                startPoint = seekBar!!.progress
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                endPoint = seekBar!!.progress
-            }
-        })
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        seekBar3.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+//            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+//                editTextNumber.setText(progress.toString())
+//                mapCircle.radius = progress.toDouble() * 1000
+//            }
+//
+//            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+//                startPoint = seekBar!!.progress
+//            }
+//
+//            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+//                endPoint = seekBar!!.progress
+//            }
+//        })
+//    }
 
     @SuppressLint("MissingPermission")
     private fun fetchLocation() {
@@ -175,6 +191,7 @@ class SearchByLocation : Fragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String?>,
@@ -188,5 +205,9 @@ class SearchByLocation : Fragment() {
                 fetchLocation()
             }
         }
+    }
+
+    companion object {
+        const val RADIUS = 10000.00
     }
 }
