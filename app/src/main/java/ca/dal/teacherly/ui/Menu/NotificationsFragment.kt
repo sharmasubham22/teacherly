@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
 import ca.dal.teacherly.databinding.FragmentMenuBinding
+import ca.dal.teacherly.ui.Sessions.PastSessionsActivity
 import ca.dal.teacherly.utils.EditProfile
 import ca.dal.teacherly.utils.ResetPassword
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -104,6 +105,12 @@ class NotificationsFragment : Fragment(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
                 true
             }
+            R.id.session_bookings -> {
+                val intent = Intent(activity, PastSessionsActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> false
         }
 
         return true

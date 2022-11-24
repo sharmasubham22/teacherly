@@ -48,7 +48,6 @@ class HomeFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
 
         var ref = db.collection("USERS").get();
-        val subjects: ArrayList<Subject> = ArrayList();
 
         InitialTutors.clearAll();
 
@@ -58,8 +57,7 @@ class HomeFragment : Fragment() {
                 if(it.documents.get(idx).get("Type")?.toString().toString() == "Teacher"){
 
                     var name = it.documents.get(idx).get("Name")?.toString().toString();
-//                    var hourlyRate = "%.2f".format(it.documents.get(idx).get("Latitude")?.toString().toString().toFloat())
-                    var hourlyRate = "30.75"
+                    var hourlyRate = it.documents.get(idx).get("Hourly Rate")?.toString().toString()
                     var phone = it.documents.get(idx).get("Mobile Number")?.toString().toString();
                     var tutorImageURL = it.documents.get(idx).get("imageURL")?.toString().toString()
 
