@@ -13,7 +13,7 @@
         android:background="@drawable/input"
         android:ems="10"
         android:hint="on scale of 100"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:paddingStart="12dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
