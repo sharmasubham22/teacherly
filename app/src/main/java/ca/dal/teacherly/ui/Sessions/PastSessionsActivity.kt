@@ -7,6 +7,7 @@ import ca.dal.teacherly.R
 import ca.dal.teacherly.adapters.SessionsAdapter
 import ca.dal.teacherly.data.InitialSessions
 import ca.dal.teacherly.models.Sessions
+import ca.dal.teacherly.utils.Constants
 import ca.dal.teacherly.utils.Utils
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
@@ -26,7 +27,7 @@ class PastSessionsActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        var ref = db.collection("BOOKINGS").get();
+        var ref = db.collection(Constants.FB_BOOKINGS_SCHEMA).get();
 
         InitialSessions.clearAll();
 

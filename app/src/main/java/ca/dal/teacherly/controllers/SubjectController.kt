@@ -2,8 +2,10 @@ package ca.dal.teacherly.controllers
 
 import android.util.Log
 import android.widget.Toast
+import ca.dal.teacherly.data.InitialSubjects
 import ca.dal.teacherly.models.Subject
 import ca.dal.teacherly.models.Tutor
+import ca.dal.teacherly.utils.Constants
 import com.google.android.gms.tasks.Task
 
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +21,33 @@ class SubjectController {
     private lateinit var db: FirebaseFirestore
 
     init {
+
+    }
+
+    companion object {
+
+        fun initializeSubjectsFromFirebase(auth: FirebaseAuth, db : FirebaseFirestore) {
+            var ref = db.collection(Constants.FB_SUBJECTS_SCHEMA).get();
+            InitialSubjects.clearAll();
+            ref.addOnSuccessListener {
+                val size = it.documents.count() - 1
+                for (idx in 0..size) {
+                    var subjectName = it.documents.get(idx).get("name")?.toString().toString();
+                    var subjectImageURL =
+                        it.documents.get(idx).get("imageURL")?.toString().toString()
+                    InitialSubjects.addTutor(
+                        Subject(
+                            subjectName,
+                            DateTimeFormatter.ISO_INSTANT.format(Instant.now()),
+                            DateTimeFormatter.ISO_INSTANT.format(
+                                Instant.now()
+                            ),
+                            subjectImageURL
+                        )
+                    );
+                }
+            }
+        }
 
     }
 

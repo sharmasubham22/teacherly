@@ -18,6 +18,7 @@ import ca.dal.teacherly.databinding.FragmentHomeBinding
 import ca.dal.teacherly.models.Subject
 import ca.dal.teacherly.models.Tutor
 import ca.dal.teacherly.models.User
+import ca.dal.teacherly.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.Instant
@@ -47,7 +48,7 @@ class HomeFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        var ref = db.collection("USERS").get();
+        var ref = db.collection(Constants.FB_USERS_SCHEMA).get();
 
         InitialTutors.clearAll();
 
