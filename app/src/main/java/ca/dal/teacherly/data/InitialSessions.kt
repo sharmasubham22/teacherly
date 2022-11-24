@@ -9,7 +9,7 @@ object InitialSessions {
 
     private var sessions: MutableList<Sessions> = mutableListOf()
 
-    fun addTutor(session:Sessions) {
+    fun addSession(session:Sessions) {
         sessions.add(session)
     }
 

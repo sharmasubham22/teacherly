@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#ff4040</color>
+    <color name="circle_color">#E2EE6A</color>
 </resources>

@@ -8,8 +8,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp"
+        >
+        <TextView
+            android:id="@+id/tutorNameCV"
+            android:layout_width="wrap_content"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:text="M"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginRight="8dp"
+            />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="3"
         >
 
     <TextView
@@ -20,6 +40,15 @@
         android:textSize="16sp"
         android:layout_marginBottom="4dp"
         />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Booking ID"
+            android:id="@+id/tutorName"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,6 +77,8 @@
                 android:layout_weight="1"/>
 
         </LinearLayout>̵
+
+    </LinearLayout>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

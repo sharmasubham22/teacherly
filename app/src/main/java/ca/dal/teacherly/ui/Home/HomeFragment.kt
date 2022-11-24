@@ -48,7 +48,6 @@ class HomeFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
 
         var ref = db.collection("USERS").get();
-        val subjects: ArrayList<Subject> = ArrayList();
 
         InitialTutors.clearAll();
 

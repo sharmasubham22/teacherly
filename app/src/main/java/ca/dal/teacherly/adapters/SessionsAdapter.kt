@@ -23,11 +23,15 @@ class SessionsAdapter(private val sessions: List<Sessions>) :
         val bookingId: TextView
         val bookingDate: TextView
         val bookingSubject: TextView
+        val tutorName: TextView
+        val tutorNameCV: TextView
 
         init {
             bookingId = view.findViewById<TextView>(R.id.bookingId)
             bookingDate = view.findViewById<TextView>(R.id.bookingDate)
             bookingSubject = view.findViewById<TextView>(R.id.bookingSubject)
+            tutorName = view.findViewById<TextView>(R.id.tutorName)
+            tutorNameCV = view.findViewById<TextView>(R.id.tutorNameCV)
         }
     }
 
@@ -45,10 +49,12 @@ class SessionsAdapter(private val sessions: List<Sessions>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val (bookingId, bookingDate, description, subject) = sessions[position]
-        viewHolder.bookingId.text = bookingId
+        val (bookingId, bookingDate, description, subject, tutorName) = sessions[position]
+        viewHolder.bookingId.text = "ID #" + bookingId
         viewHolder.bookingDate.text = bookingDate
         viewHolder.bookingSubject.text = subject
+        viewHolder.tutorName.text = tutorName
+        viewHolder.tutorNameCV.text = tutorName[0].toString()
     }
 
     // Return the size of your dataset (invoked by the layout manager)
