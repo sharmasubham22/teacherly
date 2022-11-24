@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <RelativeLayout
@@ -32,8 +32,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewInst"
+                android:id="@+id/textViewDate"
                 android:text="Text2"
+                android:layout_marginTop="5dp"
+                android:textSize="14dp"
+                android:minLines="1"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:singleLine="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewInst"
+                android:text="Text3"
                 android:layout_marginTop="5dp"
                 android:textSize="14dp"
                 android:minLines="1"
@@ -48,4 +59,4 @@
 
 
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,8 +1,10 @@
 package ca.dal.teacherly.utils
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +43,18 @@ class AssignmentView : AppCompatActivity() {
         aadapter = AssignmentAdapter(assignmentList)
 
         recyclerView.adapter = aadapter
+
+        aadapter.setOnItemCickListener(object :AssignmentAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+//                Toast.makeText(this@AssignmentView,"You clicked on $position",Toast.LENGTH_SHORT).show()
+                val intent= Intent(this@AssignmentView,AssignmentSubmit::class.java)
+                intent.putExtra("Title", assignmentList[position].Title)
+                intent.putExtra("DueDate",assignmentList[position].DueDate)
+                intent.putExtra("Instructions", assignmentList[position].Instructions)
+                startActivity(intent)
+            }
+
+        })
 
         EventChangeListener()
     }

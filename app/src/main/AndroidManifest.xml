@@ -48,6 +48,8 @@
             android:label="Teacherly"></activity>
         <activity android:name=".utils.AssignmentView"
             android:label="Teacherly"></activity>
+        <activity android:name=".utils.AssignmentSubmit"
+            android:label="Teacherly"></activity>
 
         <activity android:name=".MainActivity"
             android:label="Teacherly"
