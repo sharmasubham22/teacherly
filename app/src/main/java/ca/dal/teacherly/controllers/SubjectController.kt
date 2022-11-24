@@ -1,5 +1,6 @@
 package ca.dal.teacherly.controllers
 
+import android.util.Log
 import android.widget.Toast
 import ca.dal.teacherly.models.Subject
 import ca.dal.teacherly.models.Tutor
@@ -33,17 +34,19 @@ class SubjectController {
 
         ref.addOnSuccessListener {
 
-            for (idx in 0..it.documents.count()){
+            val size = it.documents.count()-1
+
+            for (idx in 0..size){
                 var subjectName = it.documents.get(idx).get("name")?.toString().toString();
 //                var subjectImageURL = it.documents.get(idx).get("imageURL")?.toString().toString()
                 var subjectImageURL = "https://google.com";
-                print("Subject Name" + subjectName)
+                Log.d("Subject Name", subjectName)
                 subjects.add(Subject(subjectName, DateTimeFormatter.ISO_INSTANT.format(Instant.now()), DateTimeFormatter.ISO_INSTANT.format(Instant.now()), subjectImageURL));
             }
 
         }
 
-        return subjects
+        return subjects;
     }
 
     fun createSubject(subject: Subject) : Boolean{
