@@ -1,11 +1,11 @@
 package ca.dal.teacherly.controllers
 
-import ca.dal.teacherly.models.Location
+import ca.dal.teacherly.models.LocationModel
 import ca.dal.teacherly.models.Tutor
 
 class SearchController {
 
-    fun searchByLocation(location: Location): Array<Tutor>{
+    fun searchByLocation(location: LocationModel): Array<Tutor>{
         return arrayOf<Tutor>()
     }
 
