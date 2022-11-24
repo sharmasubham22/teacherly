@@ -6,7 +6,6 @@ data class Tutor(
     var updatedAt: String = "",
     var mobileNumber: String = "",
     var email: String = "",
-    var userId: User? = null,
     var costPerHour: String = "",
     var tutorImageURL: String = "",
     var city: String = "",

@@ -17,7 +17,6 @@ class LocationModel {
                         }
                         "Email" -> {
                             t.email = v as String
-                            t.userId = User(v as String)
                         }
                         "Latitude" -> {
                             t.latitude = v as Double

@@ -88,6 +88,7 @@ class SearchByLocation : Fragment() {
 
                 val markerOption =
                     MarkerOptions().position(teacherLatLong).title(i.tutorName)
+                        .snippet(i.email + "\n" + i.mobileNumber + "\n" + i.costPerHour)
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(teacherLatLong))
                 googleMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(
