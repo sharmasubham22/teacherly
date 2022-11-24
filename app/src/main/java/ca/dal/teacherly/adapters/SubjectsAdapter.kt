@@ -1,24 +1,24 @@
 package ca.dal.teacherly.adapters
 
+import android.graphics.BitmapFactory
+import android.icu.number.NumberFormatter.with
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
-import ca.dal.teacherly.databinding.ActivityMainBinding.inflate
-import ca.dal.teacherly.databinding.CreateAssignmentBinding.inflate
-import ca.dal.teacherly.databinding.FragmentHomeBinding.inflate
-import ca.dal.teacherly.databinding.SubjectsCardLayoutBinding
-import ca.dal.teacherly.databinding.TutorCardLayoutBinding.inflate
 import ca.dal.teacherly.models.Subject
-import ca.dal.teacherly.ui.Subjects.SubjectsFragment
 import ca.dal.teacherly.ui.Subjects.SubjectsFragmentDirections
-import ca.dal.teacherly.MainActivity as MainActivity
+import com.squareup.picasso.Picasso
+import java.io.IOException
+import java.io.InputStream
+import java.net.MalformedURLException
+import java.net.URL
+
 
 class SubjectsAdapter(private val subjects: List<Subject>) :
 
@@ -55,7 +55,14 @@ class SubjectsAdapter(private val subjects: List<Subject>) :
         val (subjectName, createdAt, updatedAt, subjectImageURL) = subjects[position]
         viewHolder.subjectTitleTv.text = subjectName
 
-        val btnSearchTutors = viewHolder.itemView.findViewById<Button>(R.id.btnSearchTutors)
+        if(subjectImageURL != "" || subjectImageURL != null){
+            Picasso.get()
+                .load(subjectImageURL)
+                .resize(64,64)
+                .into(viewHolder.subjectImage);
+        }
+
+        val btnSearchTutors = viewHolder.itemView.findViewById<Button>(ca.dal.teacherly.R.id.btnSearchTutors)
 
         btnSearchTutors.setOnClickListener{
             val navController = Navigation.findNavController(viewHolder.itemView)
