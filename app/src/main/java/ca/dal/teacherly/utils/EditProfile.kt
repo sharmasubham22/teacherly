@@ -29,7 +29,7 @@ class EditProfile: AppCompatActivity() {
     private lateinit var fetchedImage : String
 
 
-    private lateinit var imageuri: Uri
+    private var imageuri: Uri? = null
 
     private var storageReference =  FirebaseStorage.getInstance().getReference("uploads")
 
@@ -79,11 +79,22 @@ class EditProfile: AppCompatActivity() {
 
         editProfileButton.setOnClickListener {
             val reference = storageReference.child(Date().time.toString())
-            reference.putFile(imageuri).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    reference.downloadUrl.addOnSuccessListener { tasks ->
-                        uploadInformation(tasks.toString(), email)
-                        Toast.makeText(this, "Profile update successful", Toast.LENGTH_LONG).show()
+            if(fetchedImage == "" && imageuri == null){
+                Toast.makeText(this, "Please upload a profile photo.", Toast.LENGTH_LONG).show()
+            }
+            else{
+                if(imageuri == null){
+                    uploadInformation(email)
+                }
+                else{
+                    imageuri?.let { it1 ->
+                        reference.putFile(it1).addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                reference.downloadUrl.addOnSuccessListener { tasks ->
+                                    uploadInformation(tasks.toString(), email)
+                                }
+                            }
+                        }
                     }
                 }
             }
