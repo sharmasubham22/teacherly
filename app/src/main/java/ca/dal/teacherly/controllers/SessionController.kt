@@ -88,22 +88,27 @@ class SessionController {
 
     }
 
+    // Method to get all sessions
     fun getAllSessions(): Array<Session>{
         return arrayOf<Session>()
     }
 
+    // Method to get upcoming sessions for student
     fun getUpcomingSessionsForStudent(student: Student): Array<Session>{
         return arrayOf<Session>()
     }
 
+    // Method to get historical sessions for student
     fun getHistoricalSessionsForStudent(student: Student):Array<Session>{
         return arrayOf<Session>()
     }
 
+    // Method to book a session for a student
     fun bookSession(session: Session): Boolean{
         return true
     }
 
+    // Method to update a session
     fun updateSession(sessionId: String, session: Session): Boolean{
         return true
     }
