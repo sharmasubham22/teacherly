@@ -1,4 +1,4 @@
-package ca.dal.teacherly
+package ca.dal.teacherly.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import ca.dal.teacherly.R
 import ca.dal.teacherly.models.LocationModel
 import ca.dal.teacherly.models.Tutor
 import ca.dal.teacherly.utils.DatabaseSingleton
@@ -130,25 +131,6 @@ class SearchByLocation : Fragment() {
 //            }
         return view
     }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        seekBar3.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-//            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-//                editTextNumber.setText(progress.toString())
-//                mapCircle.radius = progress.toDouble() * 1000
-//            }
-//
-//            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-//                startPoint = seekBar!!.progress
-//            }
-//
-//            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-//                endPoint = seekBar!!.progress
-//            }
-//        })
-//    }
 
     @SuppressLint("MissingPermission")
     private fun fetchLocation() {
