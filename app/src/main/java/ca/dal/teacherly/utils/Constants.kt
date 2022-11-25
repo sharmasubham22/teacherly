@@ -1,5 +1,9 @@
 package ca.dal.teacherly.utils
 
+/*
+ * @author Bharatwaaj Shankaranarayanan
+ * @description Constants class to maintain constants data points
+ */
 class Constants {
 
     companion object {

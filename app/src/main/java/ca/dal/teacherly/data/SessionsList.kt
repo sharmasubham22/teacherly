@@ -5,7 +5,7 @@ import ca.dal.teacherly.models.Subject
 import ca.dal.teacherly.models.Tutor
 import ca.dal.teacherly.models.User
 
-object InitialSessions {
+object SessionsList {
 
     private var sessions: MutableList<Sessions> = mutableListOf()
 
