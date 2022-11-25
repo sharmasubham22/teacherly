@@ -51,7 +51,7 @@ class SubjectController {
 
                     // Retrieve subject image URL from Firestore
                     var subjectImageURL =
-                        it.documents.get(idx).get(Constants.FB_SUBJECTS_SCHEMA_NAME_FIELD)?.toString().toString()
+                        it.documents.get(idx).get(Constants.FB_SUBJECTS_SCHEMA_IMAGE_URL_FIELD)?.toString().toString()
 
                     // Add the retrieved object into the subjects list
                     SubjectsList.addTutor(
