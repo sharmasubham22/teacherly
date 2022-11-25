@@ -3,9 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ca.dal.teacherly">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <permission
+        android:name="ca.dal.teacherly.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="ca.dal.teacherly.permission.MAPS_RECEIVE" />
 
     <application
         android:allowBackup="true"
@@ -17,20 +25,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teacherly"
         tools:targetApi="31">
+        <!-- <service android:name = ".SearchByLocation" android:foregroundServiceType="location"/> -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDg5479WJ-pl4vZlrDFttLMih_MAZUzm_A" />
+
+
+        <activity
+            android:name=".ui.Sessions.PastSessionsActivity"
+            android:label="@string/past_sessions_name" />
         <activity
             android:name=".utils.LoginManager"
             android:exported="true"
-            android:label="@string/app_name">
-        </activity>
-        <activity android:name=".utils.ResetPassword"
-            android:label="Teacherly"></activity>
-        <activity android:name=".utils.EditProfile"
-            android:label="Teacherly"></activity>
-        <activity android:name=".utils.RegisterManager"
-            android:label="Teacherly"></activity>
-        <activity android:name=".MainActivity"
-            android:label="Teacherly"
-            android:exported="true">
+            android:label="@string/app_name" />
+        <activity
+            android:name=".utils.ResetPassword"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".utils.EditProfile"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".utils.RegisterManager"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,5 +60,3 @@
     </application>
 
 </manifest>
-
-<!--    android:name=".MainActivity"-->

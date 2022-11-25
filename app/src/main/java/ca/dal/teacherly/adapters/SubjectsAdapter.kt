@@ -1,13 +1,24 @@
 package ca.dal.teacherly.adapters
 
+import android.graphics.BitmapFactory
+import android.icu.number.NumberFormatter.with
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
 import ca.dal.teacherly.models.Subject
+import ca.dal.teacherly.ui.Subjects.SubjectsFragmentDirections
+import com.squareup.picasso.Picasso
+import java.io.IOException
+import java.io.InputStream
+import java.net.MalformedURLException
+import java.net.URL
+
 
 class SubjectsAdapter(private val subjects: List<Subject>) :
 
@@ -44,7 +55,22 @@ class SubjectsAdapter(private val subjects: List<Subject>) :
         val (subjectName, createdAt, updatedAt, subjectImageURL) = subjects[position]
         viewHolder.subjectTitleTv.text = subjectName
 
+        if(subjectImageURL != "" || subjectImageURL != null){
+            Picasso.get()
+                .load(subjectImageURL)
+                .resize(64,64)
+                .into(viewHolder.subjectImage);
+        }
+
+        val btnSearchTutors = viewHolder.itemView.findViewById<Button>(ca.dal.teacherly.R.id.btnSearchTutors)
+
+        btnSearchTutors.setOnClickListener{
+            val navController = Navigation.findNavController(viewHolder.itemView)
+            val action = SubjectsFragmentDirections.actionNavigationDashboardToSearchByLocation()
+            navController.navigate(action)
+        }
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = subjects.size

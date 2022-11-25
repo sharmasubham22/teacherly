@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import ca.dal.teacherly.adapters.SubjectsAdapter
-import ca.dal.teacherly.adapters.TutorsAdapter
-import ca.dal.teacherly.data.InitialSubjects
-import ca.dal.teacherly.data.InitialTutors
+import ca.dal.teacherly.controllers.SubjectController
 import ca.dal.teacherly.databinding.FragmentSubjectsBinding
 
+/*
+ * @author Bharatwaaj Shankaranarayanan
+ * @description Subjects Screen Fragment to list and display all the subjects
+ */
 class SubjectsFragment : Fragment() {
 
+    // Creating a binding object to bind data from the fragment and take reference
     private var _binding: FragmentSubjectsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -31,8 +30,8 @@ class SubjectsFragment : Fragment() {
         _binding = FragmentSubjectsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        _binding!!.subjectsList.adapter = SubjectsAdapter(InitialSubjects.getAll())
-        _binding!!.subjectsList.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL, false)
+        // Call the Subject Controller to initialize subjects during onCreate of the fragment
+        SubjectController.initializeSubjectsFromFirebase(_binding!!, this.context)
 
         return root
     }

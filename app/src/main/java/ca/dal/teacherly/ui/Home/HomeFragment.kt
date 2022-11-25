@@ -7,15 +7,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import ca.dal.teacherly.adapters.TutorsAdapter
-import ca.dal.teacherly.data.InitialTutors
+import ca.dal.teacherly.controllers.TutorController
 import ca.dal.teacherly.databinding.FragmentHomeBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
+/*
+ * @author Bharatwaaj Shankaranarayanan
+ * @description Home Screen Fragment to list and display all the teachers
+ */
 class HomeFragment : Fragment() {
 
+    // Creating a binding object to bind data from the fragment and take reference
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -32,8 +35,8 @@ class HomeFragment : Fragment() {
 
         val root: View = binding.root
 
-        _binding!!.homeTutorsList.adapter = TutorsAdapter(InitialTutors.getAll())
-        _binding!!.homeTutorsList.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL, false)
+        // Call the Tutor Controller to initialize tutors during onCreate of the fragment
+        TutorController.initializeTutors(_binding!!, this.context)
 
         return root
     }

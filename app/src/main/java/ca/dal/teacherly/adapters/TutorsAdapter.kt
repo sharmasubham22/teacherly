@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
 import ca.dal.teacherly.models.Tutor
+import com.squareup.picasso.Picasso
 import ca.dal.teacherly.ui.Home.HomeFragmentDirections
 
 class TutorsAdapter(private val tutors: List<Tutor>) :
@@ -46,7 +47,7 @@ class TutorsAdapter(private val tutors: List<Tutor>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val (tutorName, createdAt, updatedAt, phone, email, userId, costPerHour, tutorImageURL) = tutors[position]
+        val (tutorName, createdAt, updatedAt, phone, email, costPerHour, tutorImageURL) = tutors[position]
         viewHolder.tutorTitleTv.text = tutorName
         viewHolder.tutorCostTv.text = costPerHour + "/hr"
 
@@ -58,6 +59,12 @@ class TutorsAdapter(private val tutors: List<Tutor>) :
             navController.navigate(action)
         }
 
+        if(tutorImageURL != "" || tutorImageURL != null){
+            Picasso.get()
+                .load(tutorImageURL)
+                .resize(64,64)
+                .into(viewHolder.tutorImage);
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
