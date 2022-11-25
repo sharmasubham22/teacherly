@@ -73,14 +73,17 @@ class SubjectController {
 
     }
 
+    // Method to create a new subject
     fun createSubject(subject: Subject) : Boolean{
         return true
     }
 
+    // Method to update an existing subject
     fun updateSubject(subjectId: String, subject: Subject): Boolean{
         return true
     }
 
+    // Method to map a subject to a tutor
     fun mapSubjectToTutor(subject: Subject, tutor: Tutor):Boolean{
         return true
     }
