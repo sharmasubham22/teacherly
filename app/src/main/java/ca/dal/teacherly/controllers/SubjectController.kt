@@ -20,11 +20,12 @@ import java.time.format.DateTimeFormatter
  */
 class SubjectController {
 
-
+    // Empty constructor
     init {
 
     }
 
+    // Static methods goes here
     companion object {
 
         // Method to initialize and synchronize from Firebase onto local
