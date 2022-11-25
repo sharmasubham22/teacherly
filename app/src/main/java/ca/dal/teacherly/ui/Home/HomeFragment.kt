@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.dal.teacherly.adapters.SubjectsAdapter
 import ca.dal.teacherly.adapters.TutorsAdapter
+import ca.dal.teacherly.controllers.TutorController
 import ca.dal.teacherly.data.InitialSubjects
 import ca.dal.teacherly.data.InitialTutors
 import ca.dal.teacherly.databinding.FragmentHomeBinding
@@ -24,6 +25,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
+/*
+ * @author Bharatwaaj Shankaranarayanan
+ * @description Home Screen Fragment to list and display all the teachers
+ */
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -45,33 +50,8 @@ class HomeFragment : Fragment() {
 
         val root: View = binding.root
 
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
 
-        var ref = db.collection(Constants.FB_USERS_SCHEMA).get();
-
-        InitialTutors.clearAll();
-
-        ref.addOnSuccessListener {
-            val size = it.documents.count()-1
-            for (idx in 0..size){
-                if(it.documents.get(idx).get("Type")?.toString().toString() == "Teacher"){
-
-                    var name = it.documents.get(idx).get("Name")?.toString().toString();
-                    var hourlyRate = it.documents.get(idx).get("Hourly Rate")?.toString().toString()
-                    var phone = it.documents.get(idx).get("Mobile Number")?.toString().toString();
-                    var tutorImageURL = it.documents.get(idx).get("imageURL")?.toString().toString()
-
-                    InitialTutors.addTutor(
-                    Tutor(name, DateTimeFormatter.ISO_INSTANT.format(Instant.now()), DateTimeFormatter.ISO_INSTANT.format(
-                            Instant.now()), phone, it.documents.get(idx).id, hourlyRate, tutorImageURL)
-                    );
-
-                }
-            }
-            _binding!!.homeTutorsList.adapter = TutorsAdapter(InitialTutors.getAll())
-            _binding!!.homeTutorsList.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL, false)
-        }
+        TutorController.initializeTutors(_binding!!, this.context)
 
         return root
     }

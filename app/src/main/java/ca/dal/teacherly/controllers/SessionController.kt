@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_past_sessions.*
 class SessionController {
 
     companion object {
-
         fun initializeSessions(ctx : Context?, PastSessionsRV : RecyclerView) {
 
             var ref = DatabaseSingleton.getBookingsReference().get();
