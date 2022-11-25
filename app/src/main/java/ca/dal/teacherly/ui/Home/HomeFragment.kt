@@ -16,14 +16,12 @@ import com.google.firebase.firestore.FirebaseFirestore
  */
 class HomeFragment : Fragment() {
 
+    // Creating a binding object to bind data from the fragment and take reference
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +33,7 @@ class HomeFragment : Fragment() {
 
         val root: View = binding.root
 
-
+        // Call the Tutor Controller to initialize tutors during onCreate of the fragment
         TutorController.initializeTutors(_binding!!, this.context)
 
         return root
