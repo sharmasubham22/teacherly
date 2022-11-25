@@ -1,5 +1,6 @@
 package ca.dal.teacherly.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,13 +41,14 @@ class TutorsAdapter(private val tutors: List<Tutor>) :
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         val (tutorName, createdAt, updatedAt, phone, email, costPerHour, tutorImageURL) = tutors[position]
         viewHolder.tutorTitleTv.text = tutorName
-        viewHolder.tutorCostTv.text = costPerHour + "/hr"
+        viewHolder.tutorCostTv.text = "$costPerHour/hr"
 
         if(tutorImageURL != "" || tutorImageURL != null){
             Picasso.get()
