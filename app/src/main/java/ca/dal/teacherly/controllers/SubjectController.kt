@@ -48,10 +48,18 @@ class SubjectController {
 
                 // Get entire document size
                 val size = it.documents.count() - 1
+
+                // Loop through all the available subjects
                 for (idx in 0..size) {
-                    var subjectName = it.documents.get(idx).get("name")?.toString().toString();
+
+                    // Retrieve subject name from Firestore
+                    var subjectName = it.documents.get(idx).get(Constants.FB_SUBJECTS_SCHEMA_NAME_FIELD)?.toString().toString();
+
+                    // Retrieve subject image URL from Firestore
                     var subjectImageURL =
-                        it.documents.get(idx).get("imageURL")?.toString().toString()
+                        it.documents.get(idx).get(Constants.FB_SUBJECTS_SCHEMA_NAME_FIELD)?.toString().toString()
+
+                    // Add the retrieved object into the subjects list
                     InitialSubjects.addTutor(
                         Subject(
                             subjectName,
@@ -63,6 +71,7 @@ class SubjectController {
                         )
                     );
 
+                    // Update the view
                     _binding!!.subjectsList.adapter = SubjectsAdapter(InitialSubjects.getAll())
                     _binding!!.subjectsList.layoutManager = GridLayoutManager(ctx, 2, GridLayoutManager.VERTICAL, false)
                 }
