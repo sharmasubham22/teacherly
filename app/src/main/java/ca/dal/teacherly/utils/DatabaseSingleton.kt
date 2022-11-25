@@ -7,10 +7,10 @@ import com.google.firebase.ktx.Firebase
 object DatabaseSingleton {
 
     private val database = Firebase.firestore
-    private val usersReference = database.collection("USERS")
-    private val subjectsReference = database.collection("SUBJECTS")
-    private val coursesReference = database.collection("COURSES")
+    private val usersReference = database.collection(Constants.FB_USERS_SCHEMA)
+    private val subjectsReference = database.collection(Constants.FB_SUBJECTS_SCHEMA)
     private val assignmentsReference = database.collection("ASSIGNMENTS")
+    private val bookingReference = database.collection(Constants.FB_BOOKINGS_SCHEMA)
 
     fun getUserReference(): CollectionReference {
         return usersReference
@@ -20,11 +20,11 @@ object DatabaseSingleton {
         return subjectsReference
     }
 
-    fun getCourseReference(): CollectionReference {
-        return coursesReference
-    }
-
     fun getAssignmentReference(): CollectionReference {
         return assignmentsReference
+    }
+
+    fun getBookingsReference(): CollectionReference {
+        return bookingReference
     }
 }

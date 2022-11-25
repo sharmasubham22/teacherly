@@ -29,8 +29,6 @@ class SubjectsFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,11 +39,7 @@ class SubjectsFragment : Fragment() {
         _binding = FragmentSubjectsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
-
-        SubjectController.initializeSubjectsFromFirebase(auth, db, _binding!!, this.context)
-
+        SubjectController.initializeSubjectsFromFirebase(_binding!!, this.context)
 
         return root
     }

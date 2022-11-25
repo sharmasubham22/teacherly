@@ -52,11 +52,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        else {
-            var intent = Intent(applicationContext, LoginManager::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        else {
+//            var intent = Intent(applicationContext, LoginManager::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

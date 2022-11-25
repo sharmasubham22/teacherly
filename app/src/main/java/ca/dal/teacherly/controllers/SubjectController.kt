@@ -10,6 +10,7 @@ import ca.dal.teacherly.databinding.FragmentSubjectsBinding
 import ca.dal.teacherly.models.Subject
 import ca.dal.teacherly.models.Tutor
 import ca.dal.teacherly.utils.Constants
+import ca.dal.teacherly.utils.DatabaseSingleton
 import com.google.android.gms.tasks.Task
 
 import com.google.firebase.auth.FirebaseAuth
@@ -30,8 +31,8 @@ class SubjectController {
 
     companion object {
 
-        fun initializeSubjectsFromFirebase(auth: FirebaseAuth, db : FirebaseFirestore, _binding : FragmentSubjectsBinding, ctx: Context?) {
-            var ref = db.collection(Constants.FB_SUBJECTS_SCHEMA).get();
+        fun initializeSubjectsFromFirebase(_binding : FragmentSubjectsBinding, ctx: Context?) {
+            var ref = DatabaseSingleton.getSubjectsReference().get();
             InitialSubjects.clearAll();
             ref.addOnSuccessListener {
                 val size = it.documents.count() - 1
