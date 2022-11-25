@@ -7,13 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="29"/>
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <permission
         android:name="ca.dal.teacherly.permission.MAPS_RECEIVE"
@@ -31,13 +25,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teacherly"
         tools:targetApi="31">
-
-<!--        <service android:name = ".SearchByLocation" android:foregroundServiceType="location"/>-->
-
+        <!-- <service android:name = ".SearchByLocation" android:foregroundServiceType="location"/> -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDg5479WJ-pl4vZlrDFttLMih_MAZUzm_A" />
 
+
+        <activity
+            android:name=".ui.Sessions.PastSessionsActivity"
+            android:label="@string/past_sessions_name" />
         <activity
             android:name=".utils.LoginManager"
             android:exported="true"

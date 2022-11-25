@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
-import ca.dal.teacherly.ui.Menu.NotificationsFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.login.*
 
