@@ -19,23 +19,25 @@ import ca.dal.teacherly.databinding.FragmentMenuBinding
 import ca.dal.teacherly.ui.Sessions.PastSessionsActivity
 import ca.dal.teacherly.utils.AssignmentManager
 import ca.dal.teacherly.utils.EditProfile
+import ca.dal.teacherly.utils.RegisterManager
 import ca.dal.teacherly.utils.ResetPassword
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
 import kotlinx.android.synthetic.main.fragment_menu.*
 import org.w3c.dom.Text
+import kotlin.reflect.typeOf
 
 
-class NotificationsFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
+class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
 
 
     private var _binding: FragmentMenuBinding? = null
     // private lateinit var textV : TextView
     private lateinit var phone : TextView
     private lateinit var name : TextView
-
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
 
@@ -85,6 +87,11 @@ class NotificationsFragment : Fragment(), NavigationView.OnNavigationItemSelecte
                         bundle)
                     true
                 }
+
+                R.id.my_assignments -> {
+                    findNavController().navigate(R.id.my_assignments)
+                    true
+                }
                 else -> false
             }
         }
@@ -103,6 +110,12 @@ class NotificationsFragment : Fragment(), NavigationView.OnNavigationItemSelecte
                 val receivedEmail = data?.get("Email").toString()
                 val intent = Intent(activity, EditProfile::class.java)
                 intent.putExtra("Email", receivedEmail)
+                startActivity(intent)
+                true
+            }
+
+            R.id.my_assignments ->{
+                val intent = Intent(activity, AssignmentManager::class.java)
                 startActivity(intent)
                 true
             }

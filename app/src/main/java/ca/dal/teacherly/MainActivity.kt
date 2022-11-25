@@ -1,11 +1,13 @@
 package ca.dal.teacherly
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import ca.dal.teacherly.databinding.ActivityMainBinding
+import ca.dal.teacherly.utils.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -42,11 +44,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-//        else {
-//            var intent = Intent(applicationContext, LoginManager::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
+        else {
+            var intent = Intent(applicationContext, LoginManager::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
