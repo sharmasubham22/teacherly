@@ -11,6 +11,10 @@ import ca.dal.teacherly.models.Sessions
 import ca.dal.teacherly.models.Tutor
 import com.squareup.picasso.Picasso
 
+/*
+ * @author Bharatwaaj Shankaranarayanan
+ * @description Sessions Recycler View Adapter Class
+ */
 class SessionsAdapter(private val sessions: List<Sessions>) :
 
     RecyclerView.Adapter<SessionsAdapter.ViewHolder>() {
