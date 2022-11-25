@@ -16,11 +16,8 @@ import androidx.navigation.fragment.findNavController
 import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
 import ca.dal.teacherly.databinding.FragmentMenuBinding
-<<<<<<<< HEAD:app/src/main/java/ca/dal/teacherly/ui/Menu/NotificationsFragment.kt
-import ca.dal.teacherly.utils.AssignmentManager
-========
 import ca.dal.teacherly.ui.Sessions.PastSessionsActivity
->>>>>>>> main:app/src/main/java/ca/dal/teacherly/ui/Menu/MenuFragment.kt
+import ca.dal.teacherly.utils.AssignmentManager
 import ca.dal.teacherly.utils.EditProfile
 import ca.dal.teacherly.utils.ResetPassword
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -30,11 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_menu.*
 import org.w3c.dom.Text
 
-/*
- * @author Bharatwaaj Shankaranarayanan
- * @description Menu Screen Fragment to list and display all the menu options for both teachers and students
- */
-class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
+
+class NotificationsFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
 
 
     private var _binding: FragmentMenuBinding? = null
@@ -91,10 +85,6 @@ class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                         bundle)
                     true
                 }
-                R.id.my_assignments -> {
-                    findNavController().navigate(R.id.my_assignments)
-                    true
-                }
                 else -> false
             }
         }
@@ -116,20 +106,6 @@ class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 startActivity(intent)
                 true
             }
-<<<<<<<< HEAD:app/src/main/java/ca/dal/teacherly/ui/Menu/NotificationsFragment.kt
-            R.id.my_assignments ->{
-                val intent = Intent(activity, AssignmentManager::class.java)
-                startActivity(intent)
-                true
-            }
-========
-            R.id.session_bookings -> {
-                val intent = Intent(activity, PastSessionsActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            else -> false
->>>>>>>> main:app/src/main/java/ca/dal/teacherly/ui/Menu/MenuFragment.kt
         }
 
         return true

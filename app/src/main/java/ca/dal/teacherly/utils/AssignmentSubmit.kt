@@ -51,7 +51,7 @@ class AssignmentSubmit: AppCompatActivity() {
         val mapUpdate= mapOf(
             "submissionComments" to comm
         )
-        db.collection("ASSIGNMENTS").document().update(mapUpdate)
+        db.collection("ASSIGNMENTS").document("Assignment 1").update(mapUpdate)
             .addOnSuccessListener {
                 Toast.makeText(this, "Successfull submitted",Toast.LENGTH_SHORT).show()
             }
