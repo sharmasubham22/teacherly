@@ -3,13 +3,10 @@ package ca.dal.teacherly.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
 import ca.dal.teacherly.models.Sessions
-import ca.dal.teacherly.models.Tutor
-import com.squareup.picasso.Picasso
 
 /*
  * @author Bharatwaaj Shankaranarayanan
