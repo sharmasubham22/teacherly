@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/navigationFragment"
-        android:name="ca.dal.teacherly.ui.Menu.NotificationsFragment"
+        android:name="ca.dal.teacherly.ui.Menu.MenuFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_menu" />
     <fragment
