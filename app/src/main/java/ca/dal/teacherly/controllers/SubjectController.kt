@@ -1,22 +1,15 @@
 package ca.dal.teacherly.controllers
 
 import android.content.Context
-import android.util.Log
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import ca.dal.teacherly.adapters.SubjectsAdapter
-import ca.dal.teacherly.data.InitialSubjects
+import ca.dal.teacherly.data.SubjectsList
 import ca.dal.teacherly.databinding.FragmentSubjectsBinding
 import ca.dal.teacherly.models.Subject
 import ca.dal.teacherly.models.Tutor
 import ca.dal.teacherly.utils.Constants
 import ca.dal.teacherly.utils.DatabaseSingleton
-import com.google.android.gms.tasks.Task
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
@@ -41,7 +34,7 @@ class SubjectController {
             var ref = DatabaseSingleton.getSubjectsReference().get();
 
             // Clear initial subjects data from local and clear the list of Subject Model reference
-            InitialSubjects.clearAll();
+            SubjectsList.clearAll();
 
             // Retreive all data from firebase using on success listener
             ref.addOnSuccessListener {
@@ -60,7 +53,7 @@ class SubjectController {
                         it.documents.get(idx).get(Constants.FB_SUBJECTS_SCHEMA_NAME_FIELD)?.toString().toString()
 
                     // Add the retrieved object into the subjects list
-                    InitialSubjects.addTutor(
+                    SubjectsList.addTutor(
                         Subject(
                             subjectName,
                             DateTimeFormatter.ISO_INSTANT.format(Instant.now()),
@@ -72,7 +65,7 @@ class SubjectController {
                     );
 
                     // Update the view
-                    _binding!!.subjectsList.adapter = SubjectsAdapter(InitialSubjects.getAll())
+                    _binding!!.subjectsList.adapter = SubjectsAdapter(SubjectsList.getAll())
                     _binding!!.subjectsList.layoutManager = GridLayoutManager(ctx, 2, GridLayoutManager.VERTICAL, false)
                 }
             }

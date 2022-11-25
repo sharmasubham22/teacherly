@@ -4,7 +4,7 @@ import ca.dal.teacherly.models.Subject
 import ca.dal.teacherly.models.Tutor
 import ca.dal.teacherly.models.User
 
-object InitialSubjects {
+object SubjectsList {
 
     private var subjects: MutableList<Subject> = mutableListOf()
 
