@@ -20,10 +20,13 @@ import com.google.firebase.firestore.QuerySnapshot
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
+/*
+ * @author Bharatwaaj Shankaranarayanan
+ * @description Controller/Presenter for Subjects Module
+ *              Mainly helps in modifying and maintaining the subjects module and updates the view
+ */
 class SubjectController {
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
 
     init {
 
@@ -31,10 +34,19 @@ class SubjectController {
 
     companion object {
 
+        // Method to initialize and synchronize from Firebase onto local
         fun initializeSubjectsFromFirebase(_binding : FragmentSubjectsBinding, ctx: Context?) {
+
+            // Get Database Singleton reference
             var ref = DatabaseSingleton.getSubjectsReference().get();
+
+            // Clear initial subjects data from local and clear the list of Subject Model reference
             InitialSubjects.clearAll();
+
+            // Retreive all data from firebase using on success listener
             ref.addOnSuccessListener {
+
+                // Get entire document size
                 val size = it.documents.count() - 1
                 for (idx in 0..size) {
                     var subjectName = it.documents.get(idx).get("name")?.toString().toString();
@@ -57,33 +69,6 @@ class SubjectController {
             }
         }
 
-    }
-
-    fun getAllSubjects() : ArrayList<Subject> {
-
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
-
-        var ref = db.collection("SUBJECTS").get();
-        val subjects: ArrayList<Subject> = ArrayList();
-
-
-
-        ref.addOnSuccessListener {
-
-            val size = it.documents.count()-1
-
-            for (idx in 0..size){
-                var subjectName = it.documents.get(idx).get("name")?.toString().toString();
-//                var subjectImageURL = it.documents.get(idx).get("imageURL")?.toString().toString()
-                var subjectImageURL = "https://google.com";
-                Log.d("Subject Name", subjectName)
-                subjects.add(Subject(subjectName, DateTimeFormatter.ISO_INSTANT.format(Instant.now()), DateTimeFormatter.ISO_INSTANT.format(Instant.now()), subjectImageURL));
-            }
-
-        }
-
-        return subjects;
     }
 
     fun createSubject(subject: Subject) : Boolean{
