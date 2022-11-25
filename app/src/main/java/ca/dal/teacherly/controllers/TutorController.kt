@@ -66,24 +66,30 @@ class TutorController {
 
                     }
                 }
+
+                // Add the tutors list results to the view
                 _binding!!.homeTutorsList.adapter = TutorsAdapter(InitialTutors.getAll())
                 _binding!!.homeTutorsList.layoutManager = GridLayoutManager(ctx, 2, GridLayoutManager.VERTICAL, false)
             }
         }
     }
 
+    // Method to get all tutors
     fun getAllTutors(): Array<Tutor>{
         return arrayOf<Tutor>()
     }
 
+    // Method to get Tutor by Id
     fun getTutorById(id: String): Tutor {
         return Tutor()
     }
 
+    // Method to get Tutor By name
     fun getTutorByName(name: String): Tutor {
         return Tutor()
     }
 
+    // Method to update Tutor
     fun updateTutor(id: String, Tutor: Tutor): Boolean{
         return true
     }
