@@ -31,29 +31,55 @@ class SessionController {
             // Clear Initial Sessions Data If Any
             SessionsList.clearAll();
 
-
+            // Add on Success Listener on the Firestore DB
             ref.addOnSuccessListener {
+
+                // Get the size of sessions documents from Firestore
                 val size = it.documents.count() - 1
+
+                // Loop through all the documents
                 for (idx in 0..size) {
 
-                    var bookingId = it.documents.get(idx).id.toString()
-                    var bookingDescription = it.documents.get(idx).get("bookingDesc")?.toString().toString()
-                    var bookingDate: Timestamp = it.documents.get(idx).get("bookingDate") as Timestamp
-                    var bookingSubject = it.documents.get(idx).get("bookingSubject")?.toString().toString()
-                    var tutorName = it.documents.get(idx).get("tutorName")?.toString().toString()
+                    // Fetch ID of the booking
+                    var bookingUserEmail = it.documents.get(idx).get("userEmail")?.toString().toString()
 
-                    SessionsList.addSession(
-                        Sessions(
-                            bookingId,
-                            Utils.getDateTime(bookingDate),
-                            bookingDescription,
-                            bookingSubject,
-                            tutorName
-                        )
-                    );
+                    // Check if the user logged in email and booking email matches
+                    if(bookingUserEmail == userEmail) {
+
+                        // Fetch ID of the booking
+                        var bookingId = it.documents.get(idx).id.toString()
+
+                        // Fetch Booking Description
+                        var bookingDescription =
+                            it.documents.get(idx).get("bookingDesc")?.toString().toString()
+
+                        // Fetch booking Data Timestamp
+                        var bookingDate: Timestamp =
+                            it.documents.get(idx).get("bookingDate") as Timestamp
+
+                        // Fetch booking Subject String
+                        var bookingSubject =
+                            it.documents.get(idx).get("bookingSubject")?.toString().toString()
+
+                        // Fetch tutor name
+                        var tutorName =
+                            it.documents.get(idx).get("tutorName")?.toString().toString()
+
+                        // Create and add a new session to the list
+                        SessionsList.addSession(
+                            Sessions(
+                                bookingId,
+                                Utils.getDateTime(bookingDate),
+                                bookingDescription,
+                                bookingSubject,
+                                tutorName
+                            )
+                        );
+                    }
 
                 }
 
+                // Update the view
                 PastSessionsRV.adapter = SessionsAdapter(SessionsList.getAll())
                 PastSessionsRV.layoutManager = LinearLayoutManager(ctx)
             }
