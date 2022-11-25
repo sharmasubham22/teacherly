@@ -17,18 +17,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.467" />
 
-    <ImageView
-        android:id="@+id/backBtnImage"
-        android:layout_width="38dp"
-        android:layout_height="30dp"
-        android:clickable="true"
+    <ImageButton
+        android:id="@+id/addFeedbackBackBtn"
+        android:layout_width="42dp"
+        android:layout_height="29dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+        app:layout_constraintVertical_bias="0.022"
+        app:srcCompat="@mipmap/ic_back" />
 
     <TextView
         android:id="@+id/teacherDetailsText"
@@ -38,11 +37,11 @@
         android:textColor="@color/black"
         android:textSize="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"
+        app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.021" />
 
     <EditText
         android:id="@+id/feedback"
@@ -64,8 +63,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintTop_toBottomOf="@+id/feedback"
+        app:layout_constraintVertical_bias="0.668" />
 
     <TextView
         android:id="@+id/editTextTextPersonName"

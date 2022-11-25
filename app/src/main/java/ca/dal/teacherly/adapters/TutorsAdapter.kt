@@ -3,11 +3,14 @@ package ca.dal.teacherly.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
 import ca.dal.teacherly.models.Tutor
+import ca.dal.teacherly.ui.Home.HomeFragmentDirections
 
 class TutorsAdapter(private val tutors: List<Tutor>) :
 
@@ -46,6 +49,14 @@ class TutorsAdapter(private val tutors: List<Tutor>) :
         val (tutorName, createdAt, updatedAt, phone, email, userId, costPerHour, tutorImageURL) = tutors[position]
         viewHolder.tutorTitleTv.text = tutorName
         viewHolder.tutorCostTv.text = costPerHour + "/hr"
+
+        val btnSearchTutors = viewHolder.itemView.findViewById<Button>(R.id.bookTeacherBtn)
+
+        btnSearchTutors.setOnClickListener{
+            val navController = Navigation.findNavController(viewHolder.itemView)
+            val action = HomeFragmentDirections.actionNavigationHomeFragmentToTeacherDetails()
+            navController.navigate(action)
+        }
 
     }
 
