@@ -15,6 +15,7 @@ class TeacherlyApplication : Application() {
     companion object {
         lateinit var instance: TeacherlyApplication
         private set
+        var email = ""
     }
 
     fun setIsTutor(isTutor: Boolean){
@@ -24,5 +25,4 @@ class TeacherlyApplication : Application() {
     fun getIsTutor() : Boolean{
         return this.isTutor;
     }
-
 }

@@ -16,6 +16,7 @@ import ca.dal.teacherly.R
 import ca.dal.teacherly.utils.DatabaseSingleton
 import android.widget.Toast
 import ca.dal.teacherly.MainActivity
+import ca.dal.teacherly.utils.TeacherlyApplication.Companion
 
 /**
  * A simple [Fragment] subclass.
@@ -42,7 +43,7 @@ class AddFeedback : Fragment() {
                 "Rating" to ratings,
                 "Description" to feedbackDes,
                 "Teacher" to arguments?.get("teacherEmail"),
-                "Student" to ""
+                "Student" to Companion.email
             )
 
             val feedback = DatabaseSingleton.getFeedbackReference()

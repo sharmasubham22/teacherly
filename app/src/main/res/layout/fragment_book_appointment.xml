@@ -18,7 +18,7 @@
 <!--        app:srcCompat="@mipmap/ic_back" />-->
 
     <TextView
-        android:id="@+id/teacherDetailsText"
+        android:id="@+id/appointmentDetailsText"
         android:layout_width="212dp"
         android:layout_height="32dp"
         android:text="Appointment Detail"
@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="0.432" />
 
     <EditText
-        android:id="@+id/description"
+        android:id="@+id/appointmentDescription"
         android:layout_width="375dp"
         android:layout_height="108dp"
         android:ems="10"

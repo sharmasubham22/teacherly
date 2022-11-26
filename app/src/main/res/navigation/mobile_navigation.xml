@@ -41,25 +41,19 @@
         <action
             android:id="@+id/action_teacherDetails_to_addFeedback"
             app:destination="@id/addFeedback" />
-        <action
-            android:id="@+id/action_teacherDetails_to_navigationHomeFragment"
-            app:destination="@id/navigationHomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookAppointment"
         android:name="ca.dal.teacherly.ui.Appointment.BookAppointment"
         android:label="BookAppointment" >
         <action
-            android:id="@+id/action_bookAppointment_to_teacherDetails"
-            app:destination="@id/teacherDetails" />
+            android:id="@+id/action_bookAppointment_to_navigationHomeFragment"
+            app:destination="@id/navigationHomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFeedback"
         android:name="ca.dal.teacherly.ui.Student.AddFeedback"
         android:label="AddFeedback" >
-        <action
-            android:id="@+id/action_addFeedback_to_teacherDetails"
-            app:destination="@id/teacherDetails" />
         <action
             android:id="@+id/action_addFeedback_to_navigationHomeFragment"
             app:destination="@id/navigationHomeFragment" />

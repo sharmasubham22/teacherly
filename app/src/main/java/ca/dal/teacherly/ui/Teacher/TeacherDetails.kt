@@ -43,9 +43,12 @@ class TeacherDetails : Fragment() {
         //val bookAppointmentBtn = view.findViewById<Button>(R.id.bookAppointmentBtn1)
         val bookAppointmentBtn : Button = view.findViewById(R.id.appointmentBtn23)
         bookAppointmentBtn.setOnClickListener{
+            var bundle = Bundle()
+            bundle.putString("teacherEmail",email.toString());
+            bundle.putString("teacherName",arguments?.get("teacherName").toString())
+
             val navController = Navigation.findNavController(view)
-            val action = TeacherDetailsDirections.actionTeacherDetailsToBookAppointment()
-            navController.navigate(action)
+            navController.navigate(R.id.action_teacherDetails_to_bookAppointment,bundle)
         }
 
         val feedbackBtn = view.findViewById<Button>(R.id.feedbackBtn)
