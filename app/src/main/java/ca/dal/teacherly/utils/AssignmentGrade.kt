@@ -15,6 +15,7 @@ class AssignmentGrade: AppCompatActivity() {
     lateinit var comments: TextView
     lateinit var grade: EditText
     lateinit var feedback: EditText
+    lateinit var title: String
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
 
@@ -32,7 +33,7 @@ class AssignmentGrade: AppCompatActivity() {
 
         val bundle: Bundle?=intent.extras
         val givencomments = bundle!!.getString("submissionComments")
-
+        title = bundle!!.getString("Title").toString();
         comments.text=givencomments
 
         submit.setOnClickListener {
@@ -40,13 +41,14 @@ class AssignmentGrade: AppCompatActivity() {
         }
     }
     private fun gradeAssignment(){
+
         val gr=grade.text.toString().trim()
         val feed=feedback.text.toString().trim()
         val mapUpdate= mapOf(
             "Grade" to gr,
         "Feedback" to feed
         )
-        db.collection("ASSIGNMENTS").document("Assignment 1").update(mapUpdate)
+        db.collection("ASSIGNMENTS").document(title).update(mapUpdate)
             .addOnSuccessListener {
                 Toast.makeText(this, "Successfully graded", Toast.LENGTH_SHORT).show()
             }

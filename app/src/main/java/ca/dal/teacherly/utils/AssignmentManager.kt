@@ -28,7 +28,6 @@ class AssignmentManager: AppCompatActivity() {
     lateinit var create: Button
     lateinit var filepath: Uri
     lateinit var upload: Button
-
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
 
@@ -161,11 +160,6 @@ class AssignmentManager: AppCompatActivity() {
             .addOnFailureListener{
                 Toast.makeText(this,"Assignment Creation failed", Toast.LENGTH_LONG).show()
         }
-//        val assignment_id=ref.push().key
-//        val assign = Assignments(assignment_id, title, pubDate, dues, assigninstr)
-//
-//        ref.child(assignment_id.toString()).setValue(assign).addOnCompleteListener{
-//            Toast.makeText(applicationContext,"Assignment Saved Successfuly", Toast.LENGTH_LONG).show()
-//        }
+
     }
 }

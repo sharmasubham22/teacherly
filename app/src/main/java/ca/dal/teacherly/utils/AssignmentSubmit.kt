@@ -1,6 +1,7 @@
 package ca.dal.teacherly.utils
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import ca.dal.teacherly.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.lang.reflect.Array.get
 
 class AssignmentSubmit: AppCompatActivity() {
     lateinit var submit: Button
@@ -18,6 +20,7 @@ class AssignmentSubmit: AppCompatActivity() {
     lateinit var subdue:TextView
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+    private lateinit var title: String;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +37,7 @@ class AssignmentSubmit: AppCompatActivity() {
 
         val bundle:Bundle?=intent.extras
 
-        val title = bundle!!.getString("Title")
+        title = bundle!!.getString("Title").toString();
         val due = bundle!!.getString("DueDate")
         val inst = bundle!!.getString("Instructions")
 
@@ -48,14 +51,20 @@ class AssignmentSubmit: AppCompatActivity() {
     }
     private fun submitAssignment(){
         val comm=comments.text.toString().trim()
+        val ref=db.collection("ASSIGNMENTS")
+//            ref.get()
+//                .addOnSuccessListener {
+//                    title
+//                }
         val mapUpdate= mapOf(
             "submissionComments" to comm
         )
-        db.collection("ASSIGNMENTS").document("Assignment 1").update(mapUpdate)
+        ref.document(title).update(mapUpdate)
             .addOnSuccessListener {
-                Toast.makeText(this, "Successfull submitted",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Successfully submitted",Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
+
                 Toast.makeText(this, it.toString(),Toast.LENGTH_SHORT).show()
             }
     }
