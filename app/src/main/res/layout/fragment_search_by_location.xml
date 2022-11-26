@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".SearchByLocation"
+        tools:context=".ui.SearchByLocation"
         tools:layout="@layout/fragment_search_by_location" />
 
 <!--    <SeekBar-->

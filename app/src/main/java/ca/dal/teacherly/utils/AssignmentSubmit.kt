@@ -1,0 +1,71 @@
+package ca.dal.teacherly.utils
+
+import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import ca.dal.teacherly.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import java.lang.reflect.Array.get
+
+class AssignmentSubmit: AppCompatActivity() {
+    lateinit var submit: Button
+    lateinit var comments: EditText
+    lateinit var submitTitle: TextView
+    lateinit var subInstructions: TextView
+    lateinit var subdue:TextView
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+    private lateinit var title: String;
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView((R.layout.submit_assignment))
+
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+
+        submit=findViewById(R.id.submit)
+        comments=findViewById(R.id.comments)
+        submitTitle=findViewById(R.id.submitTitleAssignment)
+        subdue=findViewById(R.id.submitdue)
+        subInstructions=findViewById(R.id.submitInstructions)
+
+        val bundle:Bundle?=intent.extras
+
+        title = bundle!!.getString("Title").toString();
+        val due = bundle!!.getString("DueDate")
+        val inst = bundle!!.getString("Instructions")
+
+        submitTitle.text=title
+        subdue.text=due
+        subInstructions.text=inst
+
+        submit.setOnClickListener {
+            submitAssignment()
+        }
+    }
+    private fun submitAssignment(){
+        val comm=comments.text.toString().trim()
+        val ref=db.collection("ASSIGNMENTS")
+//            ref.get()
+//                .addOnSuccessListener {
+//                    title
+//                }
+        val mapUpdate= mapOf(
+            "submissionComments" to comm
+        )
+        ref.document(title).update(mapUpdate)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Successfully submitted",Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+
+                Toast.makeText(this, it.toString(),Toast.LENGTH_SHORT).show()
+            }
+    }
+}

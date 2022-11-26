@@ -17,19 +17,17 @@ import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
 import ca.dal.teacherly.databinding.FragmentMenuBinding
 import ca.dal.teacherly.ui.Sessions.PastSessionsActivity
-import ca.dal.teacherly.utils.EditProfile
-import ca.dal.teacherly.utils.ResetPassword
+import ca.dal.teacherly.utils.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
 import kotlinx.android.synthetic.main.fragment_menu.*
 import org.w3c.dom.Text
+import kotlin.reflect.typeOf
 
-/*
- * @author Bharatwaaj Shankaranarayanan
- * @description Menu Screen Fragment to list and display all the menu options for both teachers and students
- */
+
 class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -37,7 +35,6 @@ class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
     // private lateinit var textV : TextView
     private lateinit var phone : TextView
     private lateinit var name : TextView
-
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
 
@@ -87,6 +84,11 @@ class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                         bundle)
                     true
                 }
+
+                R.id.my_assignments -> {
+                    findNavController().navigate(R.id.my_assignments)
+                    true
+                }
                 else -> false
             }
         }
@@ -113,7 +115,12 @@ class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 startActivity(intent)
                 true
             }
-            else -> false
+
+            R.id.my_assignments ->{
+                val intent = Intent(activity, AssignmentViewTeacher::class.java)
+                startActivity(intent)
+                true
+            }
         }
 
         return true

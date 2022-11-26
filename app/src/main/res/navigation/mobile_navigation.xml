@@ -66,7 +66,7 @@
         tools:layout="@layout/fragment_menu" />
     <fragment
         android:id="@+id/searchByLocation"
-        android:name="ca.dal.teacherly.SearchByLocation"
+        android:name="ca.dal.teacherly.ui.SearchByLocation"
         android:label="@string/list_of_tutors"
         tools:layout="@layout/fragment_search_by_location" />
 </navigation>

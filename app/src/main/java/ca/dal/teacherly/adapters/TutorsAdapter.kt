@@ -1,5 +1,6 @@
 package ca.dal.teacherly.adapters
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,14 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
 import ca.dal.teacherly.models.Tutor
+import ca.dal.teacherly.utils.Constants
 import com.squareup.picasso.Picasso
 import ca.dal.teacherly.ui.Home.HomeFragmentDirections
 
+/*
+ * @author Bharatwaaj Shankaranarayanan
+ * @description Tutors Recycler View Adapter Class
+ */
 class TutorsAdapter(private val tutors: List<Tutor>) :
 
     RecyclerView.Adapter<TutorsAdapter.ViewHolder>() {
@@ -44,13 +50,14 @@ class TutorsAdapter(private val tutors: List<Tutor>) :
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         val (tutorName, createdAt, updatedAt, phone, email, costPerHour, tutorImageURL) = tutors[position]
         viewHolder.tutorTitleTv.text = tutorName
-        viewHolder.tutorCostTv.text = costPerHour + "/hr"
+        viewHolder.tutorCostTv.text = "$costPerHour/hr"
 
         val btnSearchTutors = viewHolder.itemView.findViewById<Button>(R.id.bookTeacherBtn)
 
@@ -72,6 +79,11 @@ class TutorsAdapter(private val tutors: List<Tutor>) :
                 .load(tutorImageURL)
                 .resize(64,64)
                 .into(viewHolder.tutorImage);
+        } else {
+            Picasso.get()
+                .load(Constants.DEFAULT_IMAGE_URL)
+                .resize(64,64)
+                .into(viewHolder.tutorImage)
         }
     }
 

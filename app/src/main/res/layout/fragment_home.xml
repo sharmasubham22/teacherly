@@ -12,7 +12,8 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/home_search_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></androidx.appcompat.widget.SearchView>
+        android:layout_height="wrap_content"
+        app:queryHint="Search Tutors"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homeTutorsList"
