@@ -24,7 +24,7 @@ class AssignmentManager: AppCompatActivity() {
     lateinit var publishOn: EditText
     lateinit var due: EditText
     lateinit var inst: EditText
-    lateinit var viewbtn: Button
+//    lateinit var viewbtn: Button
     lateinit var create: Button
     lateinit var filepath: Uri
     lateinit var upload: Button
@@ -44,7 +44,7 @@ class AssignmentManager: AppCompatActivity() {
         due = findViewById(R.id.dueDate)
         inst = findViewById(R.id.instructions)
         create = findViewById(R.id.saveAssignment)
-        viewbtn=findViewById(R.id.view)
+//        viewbtn=findViewById(R.id.view)
         upload = findViewById(R.id.file)
         create.setOnClickListener {
             saveAssignment()
@@ -55,10 +55,10 @@ class AssignmentManager: AppCompatActivity() {
         due.setOnClickListener {
             selectDueDate()
         }
-        viewbtn.setOnClickListener {
-        val intent= Intent(this,AssignmentViewTeacher::class.java)
-            startActivity(intent)
-        }
+//        viewbtn.setOnClickListener {
+//        val intent= Intent(this,AssignmentViewTeacher::class.java)
+//            startActivity(intent)
+//        }
         upload.setOnClickListener {
             startFileChooser()
         }
