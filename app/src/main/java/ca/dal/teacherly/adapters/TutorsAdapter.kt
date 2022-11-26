@@ -1,16 +1,20 @@
 package ca.dal.teacherly.adapters
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
 import ca.dal.teacherly.models.Tutor
 import ca.dal.teacherly.utils.Constants
 import com.squareup.picasso.Picasso
+import ca.dal.teacherly.ui.Home.HomeFragmentDirections
 
 /*
  * @author Bharatwaaj Shankaranarayanan
@@ -54,6 +58,21 @@ class TutorsAdapter(private val tutors: List<Tutor>) :
         val (tutorName, createdAt, updatedAt, phone, email, costPerHour, tutorImageURL) = tutors[position]
         viewHolder.tutorTitleTv.text = tutorName
         viewHolder.tutorCostTv.text = "$costPerHour/hr"
+
+        val btnSearchTutors = viewHolder.itemView.findViewById<Button>(R.id.bookTeacherBtn)
+
+        btnSearchTutors.setOnClickListener{
+            val navController = Navigation.findNavController(viewHolder.itemView)
+            var bundle = Bundle()
+            bundle.putString("teacherEmail",email);
+            bundle.putString("teacherCost",costPerHour);
+            bundle.putString("teacherImageURL",tutorImageURL);
+            bundle.putString("teacherName",tutorName);
+            bundle.putString("teacherPhone",phone);
+            var action = HomeFragmentDirections.actionNavigationHomeFragmentToTeacherDetails()
+
+            navController.navigate(R.id.action_navigationHomeFragment_to_teacherDetails,bundle)
+        }
 
         if(tutorImageURL != "" || tutorImageURL != null){
             Picasso.get()

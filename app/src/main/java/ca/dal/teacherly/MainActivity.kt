@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import ca.dal.teacherly.databinding.ActivityMainBinding
 import ca.dal.teacherly.utils.LoginManager
+import ca.dal.teacherly.utils.TeacherlyApplication
+import ca.dal.teacherly.utils.TeacherlyApplication.Companion
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             ref.get().addOnSuccessListener {
                 if (it != null) {
                     var fetchedType = it.data?.get("Type")?.toString().toString()
+                    Companion.email = email
                     with(sharedPref.edit()) {
                         putString("Email", email)
                         putString("Type", fetchedType)

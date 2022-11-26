@@ -13,5 +13,6 @@ class Constants {
         val FB_USERS_SCHEMA = "USERS"
         val FB_BOOKINGS_SCHEMA = "BOOKINGS"
         val FB_SUBJECTS_SCHEMA = "SUBJECTS"
+        val FB_FEEDBACK_SCHEMA = "FEEDBACK"
     }
 }

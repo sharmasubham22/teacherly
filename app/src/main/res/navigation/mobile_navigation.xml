@@ -9,7 +9,11 @@
         android:id="@+id/navigationHomeFragment"
         android:name="ca.dal.teacherly.ui.Home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigationHomeFragment_to_teacherDetails"
+            app:destination="@id/teacherDetails" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigationDashboardFragment"
@@ -25,6 +29,40 @@
         android:id="@+id/navigationFragment"
         android:name="ca.dal.teacherly.ui.Menu.MenuFragment"
         android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_menu" >
+    </fragment>
+    <fragment
+        android:id="@+id/teacherDetails"
+        android:name="ca.dal.teacherly.ui.Teacher.TeacherDetails"
+        android:label="TeacherDetails" >
+        <action
+            android:id="@+id/action_teacherDetails_to_bookAppointment"
+            app:destination="@id/bookAppointment" />
+        <action
+            android:id="@+id/action_teacherDetails_to_addFeedback"
+            app:destination="@id/addFeedback" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookAppointment"
+        android:name="ca.dal.teacherly.ui.Appointment.BookAppointment"
+        android:label="BookAppointment" >
+        <action
+            android:id="@+id/action_bookAppointment_to_navigationHomeFragment"
+            app:destination="@id/navigationHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFeedback"
+        android:name="ca.dal.teacherly.ui.Student.AddFeedback"
+        android:label="AddFeedback" >
+        <action
+            android:id="@+id/action_addFeedback_to_navigationHomeFragment"
+            app:destination="@id/navigationHomeFragment" />
+    </fragment>
+    <!--    <fragment-->
+<!--        android:id="@+id/editProfile2"-->
+<!--        android:name="ca.dal.teacherly.utils.EditProfile"-->
+<!--        android:label="EditProfile"-->
+<!--        tools:layout="@layout/edit_profile"/>-->
         tools:layout="@layout/fragment_menu" />
     <fragment
         android:id="@+id/searchByLocation"
