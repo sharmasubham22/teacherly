@@ -13,13 +13,17 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
 import ca.dal.teacherly.models.Subject
 import ca.dal.teacherly.ui.Subjects.SubjectsFragmentDirections
+import ca.dal.teacherly.utils.Constants
 import com.squareup.picasso.Picasso
 import java.io.IOException
 import java.io.InputStream
 import java.net.MalformedURLException
 import java.net.URL
 
-
+/*
+ * @author Bharatwaaj Shankaranarayanan
+ * @description Subjects Recycler View Adapter Class
+ */
 class SubjectsAdapter(private val subjects: List<Subject>) :
 
     RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
@@ -60,6 +64,11 @@ class SubjectsAdapter(private val subjects: List<Subject>) :
                 .load(subjectImageURL)
                 .resize(64,64)
                 .into(viewHolder.subjectImage);
+        } else {
+            Picasso.get()
+                .load(Constants.DEFAULT_IMAGE_URL)
+                .resize(64,64)
+                .into(viewHolder.subjectImage)
         }
 
         val btnSearchTutors = viewHolder.itemView.findViewById<Button>(ca.dal.teacherly.R.id.btnSearchTutors)
