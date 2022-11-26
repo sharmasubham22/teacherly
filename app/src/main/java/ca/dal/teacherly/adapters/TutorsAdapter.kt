@@ -9,8 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
 import ca.dal.teacherly.models.Tutor
+import ca.dal.teacherly.utils.Constants
 import com.squareup.picasso.Picasso
 
+/*
+ * @author Bharatwaaj Shankaranarayanan
+ * @description Tutors Recycler View Adapter Class
+ */
 class TutorsAdapter(private val tutors: List<Tutor>) :
 
     RecyclerView.Adapter<TutorsAdapter.ViewHolder>() {
@@ -55,6 +60,11 @@ class TutorsAdapter(private val tutors: List<Tutor>) :
                 .load(tutorImageURL)
                 .resize(64,64)
                 .into(viewHolder.tutorImage);
+        } else {
+            Picasso.get()
+                .load(Constants.DEFAULT_IMAGE_URL)
+                .resize(64,64)
+                .into(viewHolder.tutorImage)
         }
     }
 
