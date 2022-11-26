@@ -17,10 +17,7 @@ import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.R
 import ca.dal.teacherly.databinding.FragmentMenuBinding
 import ca.dal.teacherly.ui.Sessions.PastSessionsActivity
-import ca.dal.teacherly.utils.AssignmentManager
-import ca.dal.teacherly.utils.EditProfile
-import ca.dal.teacherly.utils.RegisterManager
-import ca.dal.teacherly.utils.ResetPassword
+import ca.dal.teacherly.utils.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -113,9 +110,14 @@ class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 startActivity(intent)
                 true
             }
+            R.id.session_bookings -> {
+                val intent = Intent(activity, PastSessionsActivity::class.java)
+                startActivity(intent)
+                true
+            }
 
             R.id.my_assignments ->{
-                val intent = Intent(activity, AssignmentManager::class.java)
+                val intent = Intent(activity, AssignmentViewTeacher::class.java)
                 startActivity(intent)
                 true
             }
