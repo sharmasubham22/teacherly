@@ -1,19 +1,21 @@
 package ca.dal.teacherly.ui.Student
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.RatingBar
 import androidx.navigation.Navigation
 import ca.dal.teacherly.R
-import ca.dal.teacherly.ui.Appointment.BookAppointmentDirections
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import ca.dal.teacherly.utils.DatabaseSingleton
+import android.widget.Toast
+import ca.dal.teacherly.MainActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -21,18 +23,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class AddFeedback : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,34 +30,42 @@ class AddFeedback : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_feedback, container, false)
 
-        val addFeedbackBackBtn : ImageButton = view.findViewById(R.id.addFeedbackBackBtn)
+        val submitFeedbackBtn = view.findViewById<Button>(R.id.submitFeedbackBtn)
+        submitFeedbackBtn.setOnClickListener{
+            val ratings = view.findViewById<RatingBar?>(R.id.ratingBar).rating
+            println("Rating = ${ratings}")
 
-        addFeedbackBackBtn.setOnClickListener{
+            val feedbackDes = view.findViewById<EditText>(R.id.feedback).text.toString()
+            println("Feedback = $feedbackDes")
+
+            var feedbackMap = hashMapOf(
+                "Rating" to ratings,
+                "Description" to feedbackDes,
+                "Teacher" to arguments?.get("teacherEmail"),
+                "Student" to ""
+            )
+
+            val feedback = DatabaseSingleton.getFeedbackReference()
+            feedback.document().set(feedbackMap)
+                .addOnSuccessListener {
+                    Toast.makeText(context, "Successfull submitted",Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    println(it.toString());
+                    Toast.makeText(context, it.toString(),Toast.LENGTH_SHORT).show()
+                }
+
             val navController = Navigation.findNavController(view)
-            val action = AddFeedbackDirections.actionAddFeedbackToTeacherDetails()
-            navController.navigate(action)
+            navController.navigate(R.id.action_addFeedback_to_navigationHomeFragment)
         }
 
-        return view
-    }
+//        val addFeedbackBackBtn : ImageButton = view.findViewById(R.id.addFeedbackBackBtn)
+//        addFeedbackBackBtn.setOnClickListener{
+//            val navController = Navigation.findNavController(view)
+//            val action = AddFeedbackDirections.actionAddFeedbackToTeacherDetails()
+//            navController.navigate(action)
+//        }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddFeedback.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddFeedback().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        return view
     }
 }

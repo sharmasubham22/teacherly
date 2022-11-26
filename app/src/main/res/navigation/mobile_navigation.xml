@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_addFeedback_to_teacherDetails"
             app:destination="@id/teacherDetails" />
+        <action
+            android:id="@+id/action_addFeedback_to_navigationHomeFragment"
+            app:destination="@id/navigationHomeFragment" />
     </fragment>
     <!--    <fragment-->
 <!--        android:id="@+id/editProfile2"-->

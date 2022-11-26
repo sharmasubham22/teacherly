@@ -1,5 +1,6 @@
 package ca.dal.teacherly.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,8 +56,15 @@ class TutorsAdapter(private val tutors: List<Tutor>) :
 
         btnSearchTutors.setOnClickListener{
             val navController = Navigation.findNavController(viewHolder.itemView)
-            val action = HomeFragmentDirections.actionNavigationHomeFragmentToTeacherDetails()
-            navController.navigate(action)
+            var bundle = Bundle()
+            bundle.putString("teacherEmail",email);
+            bundle.putString("teacherCost",costPerHour);
+            bundle.putString("teacherImageURL",tutorImageURL);
+            bundle.putString("teacherName",tutorName);
+            bundle.putString("teacherPhone",phone);
+            var action = HomeFragmentDirections.actionNavigationHomeFragmentToTeacherDetails()
+
+            navController.navigate(R.id.action_navigationHomeFragment_to_teacherDetails,bundle)
         }
 
         if(tutorImageURL != "" || tutorImageURL != null){

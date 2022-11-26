@@ -11,6 +11,7 @@ object DatabaseSingleton {
     private val subjectsReference = database.collection(Constants.FB_SUBJECTS_SCHEMA)
     private val assignmentsReference = database.collection("ASSIGNMENTS")
     private val bookingReference = database.collection(Constants.FB_BOOKINGS_SCHEMA)
+    private val feedbackReference = database.collection(Constants.FB_FEEDBACK_SCHEMA)
 
     fun getUserReference(): CollectionReference {
         return usersReference
@@ -26,5 +27,9 @@ object DatabaseSingleton {
 
     fun getBookingsReference(): CollectionReference {
         return bookingReference
+    }
+
+    fun getFeedbackReference(): CollectionReference {
+        return feedbackReference
     }
 }

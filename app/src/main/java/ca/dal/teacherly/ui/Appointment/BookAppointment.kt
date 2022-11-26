@@ -41,13 +41,13 @@ class BookAppointment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_book_appointment, container, false)
 
-        val imageButton5 : ImageButton = view.findViewById(R.id.bookAppointmentBackBtn)
-
-        imageButton5.setOnClickListener{
-            val navController = Navigation.findNavController(view)
-            val action = BookAppointmentDirections.actionBookAppointmentToTeacherDetails()
-            navController.navigate(action)
-        }
+//        val imageButton5 : ImageButton = view.findViewById(R.id.bookAppointmentBackBtn)
+//
+//        imageButton5.setOnClickListener{
+//            val navController = Navigation.findNavController(view)
+//            val action = BookAppointmentDirections.actionBookAppointmentToTeacherDetails()
+//            navController.navigate(action)
+//        }
 
         return view
     }
