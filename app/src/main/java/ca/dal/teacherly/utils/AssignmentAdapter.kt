@@ -1,14 +1,15 @@
 package ca.dal.teacherly.utils
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.dal.teacherly.R
 
+//adapter class to show list of assignments in recyclerview
+/* reference: [1] https://www.youtube.com/watch?v=EoJX7h7lGxM&t=465s
+[2] https://www.youtube.com/watch?v=Ly0xwWlUpVM&t=555s*/
 class AssignmentAdapter(private val assignList:ArrayList<Assignments>) : RecyclerView.Adapter<AssignmentAdapter.MyViewHolder>(){
 private lateinit var mListener: onItemClickListener
     interface onItemClickListener{
@@ -31,7 +32,6 @@ private lateinit var mListener: onItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AssignmentAdapter.MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.assignments,parent,false)
-
         return MyViewHolder(itemView, mListener)
     }
 
@@ -40,7 +40,6 @@ private lateinit var mListener: onItemClickListener
         val dues : TextView=itemView.findViewById(R.id.textViewDate)
         val inst : TextView=itemView.findViewById(R.id.textViewInst)
         val grd : TextView=itemView.findViewById(R.id.textViewGrade)
-
 
         init {
             itemView.setOnClickListener {

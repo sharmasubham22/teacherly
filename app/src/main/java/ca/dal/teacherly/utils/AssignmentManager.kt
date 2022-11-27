@@ -1,6 +1,5 @@
 package ca.dal.teacherly.utils
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
@@ -10,8 +9,6 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import ca.dal.teacherly.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,28 +19,21 @@ class AssignmentManager: AppCompatActivity() {
     lateinit var publishOn: EditText
     lateinit var due: EditText
     lateinit var inst: EditText
-//    lateinit var viewbtn: Button
     lateinit var create: Button
     lateinit var filepath: Uri
     lateinit var upload: Button
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView((R.layout.create_assignment))
-
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
 
         assigntitle = findViewById((R.id.titleAssignment))
         publishOn = findViewById(R.id.publishDate)
         due = findViewById(R.id.dueDate)
         inst = findViewById(R.id.instructions)
         create = findViewById(R.id.saveAssignment)
-//        viewbtn=findViewById(R.id.view)
         upload = findViewById(R.id.file)
+
         create.setOnClickListener {
             saveAssignment()
         }
@@ -53,14 +43,13 @@ class AssignmentManager: AppCompatActivity() {
         due.setOnClickListener {
             selectDueDate()
         }
-//        viewbtn.setOnClickListener {
-//        val intent= Intent(this,AssignmentViewTeacher::class.java)
-//            startActivity(intent)
-//        }
         upload.setOnClickListener {
             startFileChooser()
         }
     }
+
+    //datepicker for due date
+    //reference: https://www.youtube.com/watch?v=w038N6FWYOc
     private fun selectDueDate(){
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -74,6 +63,9 @@ class AssignmentManager: AppCompatActivity() {
         }, year, month, day)
         dpd.show()
     }
+
+    //date picker for publish date
+    //reference: https://www.youtube.com/watch?v=w038N6FWYOc
     private fun selectPublishDate(){
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -88,6 +80,8 @@ class AssignmentManager: AppCompatActivity() {
         dpd.show()
     }
 
+    //to choose a file from the device
+    //reference: https://www.youtube.com/watch?v=j11O6DvkePg
     private fun startFileChooser(){
         var i = Intent()
         i.setType("application/pdf")
@@ -95,6 +89,7 @@ class AssignmentManager: AppCompatActivity() {
         startActivityForResult(Intent.createChooser(i, "Choose a file to Upload"), 111)
     }
 
+    //to open file path and show the file chosen
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val uriTxt = findViewById(R.id.uriText) as TextView
         super.onActivityResult(requestCode, resultCode, data)
@@ -103,6 +98,10 @@ class AssignmentManager: AppCompatActivity() {
             uriTxt.text = filepath.toString()
         }
     }
+
+    //to create a new assignment with file attachment feature
+    /*reference: https://www.youtube.com/watch?v=5UEdyUFi_uQ
+    https://www.youtube.com/watch?v=j11O6DvkePg */
     private fun saveAssignment() {
         val title = assigntitle.text.toString().trim()
         val pubDate = publishOn.text.toString().trim()
@@ -154,7 +153,7 @@ class AssignmentManager: AppCompatActivity() {
         assignment["DueDate"]=dues
         assignment["Instructions"]=assigninstr
 
-        db.collection("ASSIGNMENTS").document(title)
+        DatabaseSingleton.getAssignmentReference().document(title)
             .set(assignment)
             .addOnSuccessListener {
                 Toast.makeText(this,"Assignment Saved Successfuly", Toast.LENGTH_LONG).show()

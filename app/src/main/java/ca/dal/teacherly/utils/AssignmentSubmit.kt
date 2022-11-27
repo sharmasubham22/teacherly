@@ -25,8 +25,6 @@ class AssignmentSubmit: AppCompatActivity() {
     lateinit var submitTitle: TextView
     lateinit var subInstructions: TextView
     lateinit var subdue:TextView
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
     private lateinit var title: String;
     lateinit var filepath2: Uri
     lateinit var upload2: Button
@@ -35,9 +33,6 @@ class AssignmentSubmit: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView((R.layout.submit_assignment))
 
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
-
         submit=findViewById(R.id.submit)
         comments=findViewById(R.id.comments)
         submitTitle=findViewById(R.id.submitTitleAssignment)
@@ -45,8 +40,8 @@ class AssignmentSubmit: AppCompatActivity() {
         subInstructions=findViewById(R.id.submitInstructions)
         upload2 = findViewById(R.id.fileButton)
 
+        //reference: https://www.youtube.com/watch?v=EoJX7h7lGxM&t=466s
         val bundle:Bundle?=intent.extras
-
         title = bundle!!.getString("Title").toString();
         val due = bundle!!.getString("DueDate")
         val inst = bundle!!.getString("Instructions")
@@ -62,6 +57,9 @@ class AssignmentSubmit: AppCompatActivity() {
             startFileChooser()
         }
     }
+
+    //to choose a file from the device
+    //reference: https://www.youtube.com/watch?v=j11O6DvkePg
     private fun startFileChooser(){
         var i = Intent()
         i.setType("application/pdf")
@@ -69,6 +67,7 @@ class AssignmentSubmit: AppCompatActivity() {
         startActivityForResult(Intent.createChooser(i, "Choose a file to Upload"), 111)
     }
 
+    //to open file path and show the file chosen
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val uriTxt = findViewById(R.id.filename) as TextView
         super.onActivityResult(requestCode, resultCode, data)
@@ -77,13 +76,12 @@ class AssignmentSubmit: AppCompatActivity() {
             uriTxt.text = filepath2.toString()
         }
     }
+
+    //to submit file and additional comments for the assignment by the student
+    //reference: https://www.youtube.com/watch?v=aePJ-Zc4ZX8
     private fun submitAssignment(){
         val comm=comments.text.toString().trim()
-        val ref=db.collection("ASSIGNMENTS")
-//            ref.get()
-//                .addOnSuccessListener {
-//                    title
-//                }
+        val ref=DatabaseSingleton.getAssignmentReference()
 
         if(filepath2!=null){
             var pd= ProgressDialog(this);
@@ -106,15 +104,12 @@ class AssignmentSubmit: AppCompatActivity() {
                     pd.setMessage("Uploaded ${progress.toInt()}%")
                 }
         }
-        val mapUpdate= mapOf(
-            "submissionComments" to comm
-        )
+        val mapUpdate= mapOf("submissionComments" to comm)
         ref.document(title).update(mapUpdate)
             .addOnSuccessListener {
                 Toast.makeText(this, "Successfully submitted",Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
-
                 Toast.makeText(this, it.toString(),Toast.LENGTH_SHORT).show()
             }
     }
