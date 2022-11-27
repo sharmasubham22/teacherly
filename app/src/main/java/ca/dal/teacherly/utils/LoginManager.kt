@@ -62,4 +62,8 @@ class LoginManager : AppCompatActivity() {
             return true
         return false
     }
+
+    override fun onBackPressed() {
+        Toast.makeText(this, "Log In into Teacherly", Toast.LENGTH_LONG).show()
+    }
 }

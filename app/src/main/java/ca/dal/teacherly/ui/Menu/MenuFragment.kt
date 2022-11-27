@@ -127,6 +127,7 @@ class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 Firebase.auth.signOut()
                 val intent = Intent(activity, LoginManager::class.java)
                 startActivity(intent)
+                auth.signOut()
                 true
             }
         }
@@ -134,3 +135,4 @@ class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         return true
     }
 }
+
