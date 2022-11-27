@@ -18,10 +18,14 @@ import android.widget.Toast
 import ca.dal.teacherly.MainActivity
 import ca.dal.teacherly.utils.TeacherlyApplication.Companion
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AddFeedback.newInstance] factory method to
- * create an instance of this fragment.
+/*
+ * @author Sarthak Patel
+ * @description Add Feedback fragment where student can give feedback to the teacher
+ */
+
+/* Reference taken from
+ * https://learntodroid.com/how-to-move-between-fragments-using-the-navigation-component/
+ * https://firebase.google.com/docs/database/android/read-and-write#kotlin+ktx_5
  */
 class AddFeedback : Fragment() {
     override fun onCreateView(
@@ -31,41 +35,39 @@ class AddFeedback : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_feedback, container, false)
 
+        // setting up the on click listener on the submit button
         val submitFeedbackBtn = view.findViewById<Button>(R.id.submitFeedbackBtn)
         submitFeedbackBtn.setOnClickListener{
             val ratings = view.findViewById<RatingBar?>(R.id.ratingBar).rating
-            println("Rating = ${ratings}")
-
             val feedbackDes = view.findViewById<EditText>(R.id.feedback).text.toString()
-            println("Feedback = $feedbackDes")
 
-            var feedbackMap = hashMapOf(
-                "Rating" to ratings,
-                "Description" to feedbackDes,
-                "Teacher" to arguments?.get("teacherEmail"),
-                "Student" to Companion.email
-            )
+            if(ratings.toString().isNotEmpty() && feedbackDes.isNotEmpty()){
 
-            val feedback = DatabaseSingleton.getFeedbackReference()
-            feedback.document().set(feedbackMap)
-                .addOnSuccessListener {
-                    Toast.makeText(context, "Successfull submitted",Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener {
-                    println(it.toString());
-                    Toast.makeText(context, it.toString(),Toast.LENGTH_SHORT).show()
-                }
+                // creating data to store it into the firebase
+                var feedbackMap = hashMapOf(
+                    "Rating" to ratings,
+                    "Description" to feedbackDes,
+                    "Teacher" to arguments?.get("teacherEmail"),
+                    "Student" to Companion.email
+                )
 
-            val navController = Navigation.findNavController(view)
-            navController.navigate(R.id.action_addFeedback_to_navigationHomeFragment)
+                val feedback = DatabaseSingleton.getFeedbackReference()
+                feedback.document().set(feedbackMap) //
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Successfull submitted",Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        println(it.toString());
+                        Toast.makeText(context, it.toString(),Toast.LENGTH_SHORT).show()
+                    }
+                // redirecting it to the home screen fragment
+                val navController = Navigation.findNavController(view)
+                navController.navigate(R.id.action_addFeedback_to_navigationHomeFragment)
+            }else{
+                Toast.makeText(context, "Enter the details", Toast.LENGTH_LONG).show()
+            }
+
         }
-
-//        val addFeedbackBackBtn : ImageButton = view.findViewById(R.id.addFeedbackBackBtn)
-//        addFeedbackBackBtn.setOnClickListener{
-//            val navController = Navigation.findNavController(view)
-//            val action = AddFeedbackDirections.actionAddFeedbackToTeacherDetails()
-//            navController.navigate(action)
-//        }
 
         return view
     }
