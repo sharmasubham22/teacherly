@@ -24,26 +24,20 @@ class AssignmentViewTeacher : AppCompatActivity() {
     lateinit var assignmentList: ArrayList<Assignments>
     lateinit var aadapter: AssignmentAdapterTeacher
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView((R.layout.assignment_view))
 
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
         assignList = mutableListOf();
         recyclerView = findViewById(R.id.list_view2)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
-
         assignmentList = arrayListOf()
-
         aadapter = AssignmentAdapterTeacher(assignmentList)
-
         recyclerView.adapter = aadapter
 
+        //on item click listener sends data to next screen
+        //reference: https://www.youtube.com/watch?v=EoJX7h7lGxM&t=465s
         aadapter.setOnItemCickListener(object :AssignmentAdapterTeacher.onItemClickListener{
             override fun onItemClick(position: Int) {
 //                Toast.makeText(this@AssignmentView,"You clicked on $position",Toast.LENGTH_SHORT).show()
@@ -53,14 +47,13 @@ class AssignmentViewTeacher : AppCompatActivity() {
                 intent.putExtra("submissionComments", assignmentList[position].submissionComments)
                 startActivity(intent)
             }
-
         })
-
         EventChangeListener()
     }
-    private fun EventChangeListener(){
 
-        db.collection("ASSIGNMENTS")
+    //view of assignments submissions list on te screen from firestore database
+    private fun EventChangeListener(){
+        DatabaseSingleton.getAssignmentReference()
             .addSnapshotListener(object: EventListener<QuerySnapshot>{
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error!=null){
@@ -74,9 +67,6 @@ class AssignmentViewTeacher : AppCompatActivity() {
                     }
                     aadapter.notifyDataSetChanged()
                 }
-
             })
-
-
     }
 }

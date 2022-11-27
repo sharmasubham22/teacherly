@@ -31,6 +31,7 @@ class AssignmentGrade: AppCompatActivity() {
         grade=findViewById(R.id.grade)
         feedback=findViewById(R.id.assignmentFeedback)
 
+        //reference: https://www.youtube.com/watch?v=EoJX7h7lGxM&t=466s
         val bundle: Bundle?=intent.extras
         val givencomments = bundle!!.getString("submissionComments")
         title = bundle!!.getString("Title").toString();
@@ -40,6 +41,9 @@ class AssignmentGrade: AppCompatActivity() {
             gradeAssignment()
         }
     }
+
+    //to store the grade and feedback for the assignment
+    //reference: https://www.youtube.com/watch?v=aePJ-Zc4ZX8
     private fun gradeAssignment(){
 
         val gr=grade.text.toString().trim()
@@ -48,7 +52,7 @@ class AssignmentGrade: AppCompatActivity() {
             "Grade" to gr,
         "Feedback" to feed
         )
-        db.collection("ASSIGNMENTS").document(title).update(mapUpdate)
+        DatabaseSingleton.getAssignmentReference().document(title).update(mapUpdate)
             .addOnSuccessListener {
                 Toast.makeText(this, "Successfully graded", Toast.LENGTH_SHORT).show()
             }
