@@ -28,6 +28,27 @@ class BookAppointment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_book_appointment, container, false)
+        val sp : Spinner = view.findViewById(R.id.subjectDropDown)
+        var subjects = arrayOf("Science","Maths","Physics","Computer Science")
+
+        val spinnerAdapter : ArrayAdapter<String> = ArrayAdapter(requireActivity(), androidx.transition.R.layout.support_simple_spinner_dropdown_item, subjects)
+        sp.adapter = spinnerAdapter
+
+        var selectedItem = ""
+        sp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ){
+                selectedItem = subjects[position]
+                if (position != 0) {
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
 
         val appointmentDate = view.findViewById<EditText>(R.id.appointmentDate)
         appointmentDate.showSoftInputOnFocus = false;
@@ -66,9 +87,10 @@ class BookAppointment : Fragment() {
                 "userEmail" to Companion.email,
                 "teacherEmail" to arguments?.get("teacherEmail").toString(),
                 "bookingDate" to Timestamp(Date(appointmentDate.text.toString())),
-                "bookingSubject" to "Maths"
+                "bookingSubject" to selectedItem
             )
 
+            println("selectedItem =  "+selectedItem)
             val booking = DatabaseSingleton.getBookingsReference()
             booking.document().set(bookingMap)
                 .addOnSuccessListener {
