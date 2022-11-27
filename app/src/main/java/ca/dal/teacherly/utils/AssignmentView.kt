@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,6 +54,10 @@ class AssignmentView : AppCompatActivity() {
                 intent.putExtra("Instructions", assignmentList[position].Instructions)
                 intent.putExtra("Grade",assignmentList[position].Grade)
                 startActivity(intent)
+                var g=findViewById<TextView>(R.id.textViewGrade)
+                if (g.length()!=0){
+                    Toast.makeText(this@AssignmentView,"You have already submitted",Toast.LENGTH_SHORT).show()
+                }
             }
 
         })
