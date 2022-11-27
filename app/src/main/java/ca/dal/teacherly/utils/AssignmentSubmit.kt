@@ -1,5 +1,9 @@
 package ca.dal.teacherly.utils
 
+import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -10,7 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import ca.dal.teacherly.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import java.lang.reflect.Array.get
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AssignmentSubmit: AppCompatActivity() {
     lateinit var submit: Button
@@ -21,6 +28,8 @@ class AssignmentSubmit: AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
     private lateinit var title: String;
+    lateinit var filepath2: Uri
+    lateinit var upload2: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +43,7 @@ class AssignmentSubmit: AppCompatActivity() {
         submitTitle=findViewById(R.id.submitTitleAssignment)
         subdue=findViewById(R.id.submitdue)
         subInstructions=findViewById(R.id.submitInstructions)
+        upload2 = findViewById(R.id.fileButton)
 
         val bundle:Bundle?=intent.extras
 
@@ -48,6 +58,24 @@ class AssignmentSubmit: AppCompatActivity() {
         submit.setOnClickListener {
             submitAssignment()
         }
+        upload2.setOnClickListener {
+            startFileChooser()
+        }
+    }
+    private fun startFileChooser(){
+        var i = Intent()
+        i.setType("application/pdf")
+        i.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(Intent.createChooser(i, "Choose a file to Upload"), 111)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val uriTxt = findViewById(R.id.filename) as TextView
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode==111 && resultCode== Activity.RESULT_OK && data != null){
+            filepath2=data.data!!
+            uriTxt.text = filepath2.toString()
+        }
     }
     private fun submitAssignment(){
         val comm=comments.text.toString().trim()
@@ -56,6 +84,28 @@ class AssignmentSubmit: AppCompatActivity() {
 //                .addOnSuccessListener {
 //                    title
 //                }
+
+        if(filepath2!=null){
+            var pd= ProgressDialog(this);
+            pd.setTitle("Uploading")
+            pd.show()
+            val formatter=SimpleDateFormat("yyyy_MM_dd_HH:mm:ss", Locale.getDefault())
+            val now=Date()
+            val fileName=formatter.format(now)
+            var pdfref= FirebaseStorage.getInstance().getReference("assignmentssubmissions/$fileName")
+            pdfref.putFile(filepath2)
+                .addOnSuccessListener {
+                    pd.dismiss()
+                }
+                .addOnFailureListener{snapshot->
+                    pd.dismiss()
+                    Toast.makeText(this, snapshot.message, Toast.LENGTH_LONG).show()
+                }
+                .addOnProgressListener { p0->
+                    var progress:Double =(100.0*p0.bytesTransferred)/p0.totalByteCount
+                    pd.setMessage("Uploaded ${progress.toInt()}%")
+                }
+        }
         val mapUpdate= mapOf(
             "submissionComments" to comm
         )

@@ -29,7 +29,7 @@ class AssignmentAdapterTeacher(private val assignList:ArrayList<Assignments>) : 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AssignmentAdapterTeacher.MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.assignments,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.assignments_teacher,parent,false)
 
         return MyViewHolder(itemView, mListener)
     }

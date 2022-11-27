@@ -55,8 +55,18 @@
 
         </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>
 
+    <TextView
+        android:id="@+id/textViewGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="360dp"
+        android:layout_marginTop="50dp"
+        android:text="Grade"
+        android:textSize="14dp"
+        android:textStyle="bold" />
 
 
 </androidx.cardview.widget.CardView>

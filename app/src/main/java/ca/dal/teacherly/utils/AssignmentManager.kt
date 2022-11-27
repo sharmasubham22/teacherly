@@ -7,15 +7,13 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import ca.dal.teacherly.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -92,15 +90,17 @@ class AssignmentManager: AppCompatActivity() {
 
     private fun startFileChooser(){
         var i = Intent()
-        i.setType("pdf/*")
+        i.setType("application/pdf")
         i.setAction(Intent.ACTION_GET_CONTENT)
         startActivityForResult(Intent.createChooser(i, "Choose a file to Upload"), 111)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val uriTxt = findViewById(R.id.uriText) as TextView
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode==111 && resultCode== Activity.RESULT_OK && data != null){
             filepath=data.data!!
+            uriTxt.text = filepath.toString()
         }
     }
     private fun saveAssignment() {
@@ -129,8 +129,10 @@ class AssignmentManager: AppCompatActivity() {
             var pd= ProgressDialog(this);
             pd.setTitle("Uploading")
             pd.show()
-
-            var pdfref= FirebaseStorage.getInstance().reference.child("assignmentFiles/")
+                val formatter= SimpleDateFormat("yyyy_MM_dd_HH:mm:ss", Locale.getDefault())
+                val now=Date()
+                val fileName=formatter.format(now)
+            var pdfref= FirebaseStorage.getInstance().getReference("assignments/$fileName")
             pdfref.putFile(filepath)
                 .addOnSuccessListener {
                     pd.dismiss()
