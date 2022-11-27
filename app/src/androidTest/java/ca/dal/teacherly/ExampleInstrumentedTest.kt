@@ -1,12 +1,15 @@
 package ca.dal.teacherly
 
-import androidx.test.platform.app.InstrumentationRegistry
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.test.platform.app.InstrumentationRegistry
+import ca.dal.teacherly.controllers.SubjectController
+import ca.dal.teacherly.databinding.FragmentSubjectsBinding
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -15,10 +18,12 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
     @Test
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("ca.dal.teacherly", appContext.packageName)
     }
+
 }
