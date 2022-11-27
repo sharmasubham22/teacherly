@@ -117,7 +117,7 @@ class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             }
 
             R.id.my_assignments ->{
-                val intent = Intent(activity, AssignmentViewTeacher::class.java)
+                val intent = Intent(activity, AssignmentView::class.java)
                 startActivity(intent)
                 true
             }

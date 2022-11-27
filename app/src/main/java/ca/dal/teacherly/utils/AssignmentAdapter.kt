@@ -23,6 +23,7 @@ private lateinit var mListener: onItemClickListener
         holder.atitle.text=assignment.Title
         holder.dues.text=assignment.DueDate
         holder.inst.text=assignment.Instructions
+        holder.grd.text=assignment.Grade
     }
     override fun getItemCount(): Int {
         return assignList.size
@@ -38,6 +39,7 @@ private lateinit var mListener: onItemClickListener
         val atitle : TextView=itemView.findViewById(R.id.textViewName)
         val dues : TextView=itemView.findViewById(R.id.textViewDate)
         val inst : TextView=itemView.findViewById(R.id.textViewInst)
+        val grd : TextView=itemView.findViewById(R.id.textViewGrade)
 
 
         init {

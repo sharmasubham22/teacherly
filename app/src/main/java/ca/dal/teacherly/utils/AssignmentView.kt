@@ -51,6 +51,7 @@ class AssignmentView : AppCompatActivity() {
                 intent.putExtra("Title", assignmentList[position].Title)
                 intent.putExtra("DueDate",assignmentList[position].DueDate)
                 intent.putExtra("Instructions", assignmentList[position].Instructions)
+                intent.putExtra("Grade",assignmentList[position].Grade)
                 startActivity(intent)
             }
 
