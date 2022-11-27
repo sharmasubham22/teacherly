@@ -11,11 +11,11 @@
             android:icon="@drawable/ic_assignments"
             android:title="@string/my_assignments"
             app:showAsAction="ifRoom" />
-        <item
-            android:id="@+id/my_address"
-            android:icon="@drawable/ic_address"
-            android:title="@string/my_address"
-            app:showAsAction="ifRoom" />
+<!--        <item-->
+<!--            android:id="@+id/my_address"-->
+<!--            android:icon="@drawable/ic_address"-->
+<!--            android:title="@string/my_address"-->
+<!--            app:showAsAction="ifRoom" />-->
         <item
             android:id="@+id/session_bookings"
             android:icon="@drawable/ic_calendar"

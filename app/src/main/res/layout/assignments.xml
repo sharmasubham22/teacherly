@@ -55,8 +55,19 @@
 
         </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>
 
+    <TextView
+        android:id="@+id/textViewGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="345dp"
+        android:layout_marginTop="35dp"
+        android:textSize="16dp"
+        android:textColor="@color/quantum_googgreen"
+        android:textStyle="bold"
+        android:padding="6dp"/>
 
 
 </androidx.cardview.widget.CardView>

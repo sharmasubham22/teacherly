@@ -1,5 +1,6 @@
 package ca.dal.teacherly.ui.Menu
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,8 +22,10 @@ import ca.dal.teacherly.utils.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_menu.*
 import org.w3c.dom.Text
 import kotlin.reflect.typeOf
@@ -115,9 +118,14 @@ class MenuFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 startActivity(intent)
                 true
             }
-
             R.id.my_assignments ->{
-                val intent = Intent(activity, AssignmentViewTeacher::class.java)
+                val intent = Intent(activity, AssignmentView::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.logout -> {
+                Firebase.auth.signOut()
+                val intent = Intent(activity, LoginManager::class.java)
                 startActivity(intent)
                 true
             }
