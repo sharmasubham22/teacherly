@@ -18,6 +18,13 @@ import java.util.*
  * @author Sarthak Patel
  * @description Book Appointment fragment to submit the form to for appointment
  */
+
+/* Reference taken from
+ * https://www.digitalocean.com/community/tutorials/android-spinner-using-kotlin
+ * https://learntodroid.com/how-to-move-between-fragments-using-the-navigation-component/
+ * https://www.tutorialspoint.com/how-to-use-date-time-picker-dialog-in-kotlin-android
+ * https://firebase.google.com/docs/database/android/read-and-write#kotlin+ktx_5
+ */
 class BookAppointment : Fragment() {
 
     override fun onCreateView(

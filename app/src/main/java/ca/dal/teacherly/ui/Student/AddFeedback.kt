@@ -22,6 +22,11 @@ import ca.dal.teacherly.utils.TeacherlyApplication.Companion
  * @author Sarthak Patel
  * @description Add Feedback fragment where student can give feedback to the teacher
  */
+
+/* Reference taken from
+ * https://learntodroid.com/how-to-move-between-fragments-using-the-navigation-component/
+ * https://firebase.google.com/docs/database/android/read-and-write#kotlin+ktx_5
+ */
 class AddFeedback : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

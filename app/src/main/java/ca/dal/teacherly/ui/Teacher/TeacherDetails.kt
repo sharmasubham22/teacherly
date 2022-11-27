@@ -16,6 +16,13 @@ import com.squareup.picasso.Picasso
  * @author Sarthak Patel
  * @description Teacher Detail Fragment where all details of the teacher is visible
  */
+
+/*
+ * Reference Taken From
+ * https://learntodroid.com/how-to-move-between-fragments-using-the-navigation-component/
+ * https://guides.codepath.com/android/Displaying-Images-with-the-Picasso-Library
+ * https://firebase.google.com/docs/database/android/read-and-write#kotlin+ktx_5
+ */
 class TeacherDetails : Fragment() {
 
     override fun onCreateView(
