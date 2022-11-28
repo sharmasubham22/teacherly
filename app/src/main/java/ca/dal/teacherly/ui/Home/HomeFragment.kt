@@ -18,8 +18,9 @@ import ca.dal.teacherly.data.InitialTutors
 import ca.dal.teacherly.databinding.FragmentHomeBinding
 import ca.dal.teacherly.models.Tutor
 
-/*
+/**
  * @author Bharatwaaj Shankaranarayanan
+ * @author Meet Master
  * @description Home Screen Fragment to list and display all the teachers
  */
 class HomeFragment : Fragment() {
@@ -62,16 +63,16 @@ class HomeFragment : Fragment() {
         this.tempTeacherList = arrayListOf<Tutor>()
         tempTeacherList.addAll(InitialTutors.getAll())
 
+        //Search functionality for searching teachers by using their name. As soon as users types
+        // in any character, system will start filtering teachers by matching search query with
+        // the teachers' name
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                Log.d("onQueryTextSubmit", "onQueryTextSubmit")
                 return false
             }
 
             @SuppressLint("NotifyDataSetChanged")
             override fun onQueryTextChange(searchQuery: String?): Boolean {
-
-                Log.d("onQueryTextChange", "onQueryTextChange")
 
                 tempTeacherList.clear()
                 val searchText = searchQuery!!.lowercase()
