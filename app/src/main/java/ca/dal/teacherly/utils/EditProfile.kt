@@ -37,9 +37,10 @@ class EditProfile: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_profile)
 
+        // Get email from intent
         var email = intent.getStringExtra("Email").toString()
-        println("Edit Profile Email: $email")
 
+        // When the user clicks upload image
         uploadImage.setOnClickListener{
             val intent = Intent()
             intent.type = "image/*"
@@ -57,6 +58,7 @@ class EditProfile: AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
+        // Fetching the data of the logged in user
         val ref = db.collection("USERS").document(email)
         ref.get().addOnSuccessListener {
             if(it!=null){
@@ -68,6 +70,7 @@ class EditProfile: AppCompatActivity() {
                 val fetchedPostalCode = it.data?.get("Postal Code")?.toString()
                 fetchedImage = it.data?.get("imageUrl")?.toString().toString()
 
+                // Displaying the fetched data of user by default
                 name.text = fetchedName
                 phone.text = fetchedPhoneNumber
                 street.text = fetchedStreetName
@@ -77,15 +80,20 @@ class EditProfile: AppCompatActivity() {
             }
         }
 
+        // When the user clicks edit button
         editProfileButton.setOnClickListener {
             val reference = storageReference.child(Date().time.toString())
+
+            // If theres no profile photo of user in database the system prompts user to add the photo
             if(fetchedImage == "" && imageuri == null){
                 Toast.makeText(this, "Please upload a profile photo.", Toast.LENGTH_LONG).show()
             }
+            // If there is a photo of user in database
             else{
                 if(imageuri == null){
                     uploadInformation(email)
                 }
+                // Data of uploaded file
                 else{
                     imageuri?.let { it1 ->
                         reference.putFile(it1).addOnCompleteListener {
@@ -101,6 +109,7 @@ class EditProfile: AppCompatActivity() {
         }
     }
 
+    // Profile updating with both new photo and data
     private fun uploadInformation(imageUrl: String, email: String) {
         var name1 = name.text.toString()
         var mobileNumber1 = phone.text.toString()
@@ -109,6 +118,7 @@ class EditProfile: AppCompatActivity() {
         var province1 = province.text.toString()
         var postalCode1 = postalCode.text.toString()
 
+        // Creating a hash map of updated user data
         val user = hashMapOf(
             "Name" to name1,
             "Mobile Number" to mobileNumber1,
@@ -119,8 +129,7 @@ class EditProfile: AppCompatActivity() {
             "imageUrl" to imageUrl
         )
 
-        println("Profile Update $user")
-
+        // Updating profile of user
         val users = db.collection("USERS")
         val query = users.document(email).get()
             .addOnSuccessListener { tasks ->
@@ -137,6 +146,7 @@ class EditProfile: AppCompatActivity() {
             }
     }
 
+    // Profile updating with new data
     private fun uploadInformation(email: String) {
         var name1 = name.text.toString()
         var mobileNumber1 = phone.text.toString()
@@ -145,6 +155,7 @@ class EditProfile: AppCompatActivity() {
         var province1 = province.text.toString()
         var postalCode1 = postalCode.text.toString()
 
+        // Creating a hash map of updated user data
         val user = hashMapOf(
             "Name" to name1,
             "Mobile Number" to mobileNumber1,
@@ -154,8 +165,7 @@ class EditProfile: AppCompatActivity() {
             "Postal Code" to postalCode1
         )
 
-        println("Profile Update $user")
-
+        // Updating profile of user
         val users = db.collection("USERS")
         val query = users.document(email).get()
             .addOnSuccessListener { tasks ->
@@ -172,15 +182,6 @@ class EditProfile: AppCompatActivity() {
             }
     }
 
-    private fun checkForInput(): Boolean {
-        if(editName.text.toString().trim().isNotEmpty() && editMobile.text.toString().trim().isNotEmpty()
-            && editStreetName.text.toString().trim().isNotEmpty()
-            && editCity.text.toString().trim().isNotEmpty() && editProvince.text.toString().trim().isNotEmpty()
-            && editPostalCode.text.toString().trim().isNotEmpty()){
-            return true
-        }
-        return false
-    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==100 && resultCode== RESULT_OK){

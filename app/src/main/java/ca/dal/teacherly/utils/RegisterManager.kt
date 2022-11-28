@@ -18,7 +18,7 @@ class RegisterManager : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
-
+    // Page opens when user wants to register on the app
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +29,7 @@ class RegisterManager : AppCompatActivity() {
 
         val rdGroup = findViewById<RadioGroup>(R.id.radioGroup)
 
+        // Based on the selection as a Teacher or Student, Rate field varies
         radioGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
             override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
                 val btn = findViewById<RadioButton>(checkedId)
@@ -44,11 +45,12 @@ class RegisterManager : AppCompatActivity() {
             }
         })
 
-
+        // When register button will be clicked
         Registration.setOnClickListener {
             val selectedBtn: Int = rdGroup!!.checkedRadioButtonId
             val btn = findViewById<RadioButton>(selectedBtn)
 
+            // Validating the fields
             if (rdGroup.checkedRadioButtonId != -1) {
                 if (checkForInput()) {
 
@@ -67,7 +69,9 @@ class RegisterManager : AppCompatActivity() {
                     var latitude = p.latitude
                     var longitude = p.longitude
 
+                    // If password matches the Hash Map of user is created
                     if (password == confirmPassword) {
+                        // If user is selected as a Student
                         if(type == "Student"){
                             var user = hashMapOf(
                                 "Type" to type,
@@ -83,13 +87,17 @@ class RegisterManager : AppCompatActivity() {
                                 "imageUrl" to ""
                             )
 
+                            // Communicating between Firebase and App
                             val users = db.collection("USERS")
                             val query = users.whereEqualTo("Email", email).get()
                                 .addOnSuccessListener { tasks ->
+                                    // If no user is found with same details
                                     if (tasks.isEmpty) {
+                                        // New user is created in Firebase
                                         auth.createUserWithEmailAndPassword(email, password)
                                             .addOnCompleteListener(this) { task ->
                                                 if (task.isSuccessful) {
+                                                    // Email is sent for verification
                                                     auth.currentUser?.sendEmailVerification()
                                                         ?.addOnSuccessListener {
                                                             println("Lat: $latitude")
@@ -118,6 +126,7 @@ class RegisterManager : AppCompatActivity() {
                                     }
                                 }
                         }
+                        // If user is selected as a Teacher
                         if(type == "Teacher"){
                             var user = hashMapOf(
                                 "Type" to type,
@@ -134,13 +143,17 @@ class RegisterManager : AppCompatActivity() {
                                 "imageUrl" to ""
                             )
 
+                            // Communicating between Firebase and App
                             val users = db.collection("USERS")
                             val query = users.whereEqualTo("Email", email).get()
                                 .addOnSuccessListener { tasks ->
+                                    // If no user is found with same details
                                     if (tasks.isEmpty) {
+                                        // New user is created in Firebase
                                         auth.createUserWithEmailAndPassword(email, password)
                                             .addOnCompleteListener(this) { task ->
                                                 if (task.isSuccessful) {
+                                                    // Email is sent for verification
                                                     auth.currentUser?.sendEmailVerification()
                                                         ?.addOnSuccessListener {
                                                             println("Lat: $latitude")
@@ -183,6 +196,7 @@ class RegisterManager : AppCompatActivity() {
     }
 
 
+    // This function checks and validated all the input fields.
     private fun checkForInput(): Boolean {
         if (RegisterName.text.toString().trim().isNotEmpty() && RegisterEmail.text.toString().trim()
                 .isNotEmpty()
