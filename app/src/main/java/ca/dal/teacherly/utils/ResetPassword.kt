@@ -24,6 +24,7 @@ class ResetPassword :AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+        // When reset password is clicked a link to reset the password is sent to the user on his/her designated email.
         resetPasswordButton.setOnClickListener{
             val newPassword = editPassword.text.toString()
             auth.sendPasswordResetEmail(newPassword)
