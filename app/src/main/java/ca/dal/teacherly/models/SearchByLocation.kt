@@ -1,4 +1,4 @@
-package ca.dal.teacherly.ui
+package ca.dal.teacherly.models
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -13,8 +13,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import ca.dal.teacherly.R
-import ca.dal.teacherly.models.LocationModel
-import ca.dal.teacherly.models.Tutor
 import ca.dal.teacherly.utils.DatabaseSingleton
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -25,35 +23,25 @@ import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.fragment_search_by_location.*
 import kotlinx.android.synthetic.main.fragment_search_by_location.view.*
 
+/***
+ * @author Meet Master
+ * @description This fragment is taking users location and displaying nearby teachers for the selected subject
+ */
+
+
 class SearchByLocation : Fragment() {
 
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
-    private val permissionCode = 101
 
     private lateinit var mapCircle: Circle
     private lateinit var circle: CircleOptions
 
     private var teacherList: ArrayList<Tutor>? = arrayListOf()
 
-    //    var startPoint = 0
-//    var endPoint = 0
-//    private var locationArrayList = ArrayList<LatLng>()
-
-//    var TamWorth = LatLng(-31.083332, 150.916672)
-//    var NewCastle = LatLng(-32.916668, 151.750000)
-//    var Brisbane = LatLng(-27.470125, 153.021072)
-
+    // This function is using GoogleMap API for displaying map, user's location and nearby
+    // registered teacher's location
     private val callback = OnMapReadyCallback { googleMap ->
-
-//        locationArrayList!!.add(TamWorth)
-//        locationArrayList!!.add(NewCastle)
-//        locationArrayList!!.add(Brisbane)
-
-
-//        locationArrayList.add(LatLng(44.6363833242448, -63.587331330932855))
-//        locationArrayList.add(LatLng(44.63698644071133, -63.58929470783781))
 
         val userLatLng = LatLng(currentLocation.latitude, currentLocation.longitude)
         val userLocationMarker = MarkerOptions().position(userLatLng).title("Current location")
@@ -68,7 +56,6 @@ class SearchByLocation : Fragment() {
 
         val markerOptions = ArrayList<MarkerOptions>()
 
-//        Log.d("TeacherList ","${teacherList!![0]}")
         for (i in teacherList!!) {
 
             val result = FloatArray(3)
@@ -83,6 +70,7 @@ class SearchByLocation : Fragment() {
 
             println(result[0])
 
+            //Checking if the registered teachers are in the location of current user's proximity
             if (result[0] <= RADIUS) {
 
                 val teacherLatLong = LatLng(i.latitude, i.longitude)
@@ -101,6 +89,7 @@ class SearchByLocation : Fragment() {
             }
         }
 
+        //Displaying all the nearby teachers on the google map
         for (mo in markerOptions) {
             googleMap.addMarker(mo)?.showInfoWindow()
         }
@@ -126,12 +115,12 @@ class SearchByLocation : Fragment() {
                 teacherList = locationModel.getTeacherList(documents)
                 fetchLocation()
             }
-//            .addOnFailureListener {
-//
-//            }
+
         return view
     }
 
+    //This function will fetch current user's location using mobile's GPS if users has provided
+    // location permission
     @SuppressLint("MissingPermission")
     private fun fetchLocation() {
         if ((ActivityCompat.checkSelfPermission(
@@ -192,5 +181,6 @@ class SearchByLocation : Fragment() {
 
     companion object {
         const val RADIUS = 10000.00
+        const val permissionCode = 101
     }
 }
